@@ -1,19 +1,27 @@
 #include "defines.h"
-#include "serial.h"
 #include "lib.h"
 
-/* １文字送信 */
-int putc(unsigned char c)
+////////////////////memory library////////////////////
+void *
+set_data_in_memory (void *first_address, int16 set_data, int32 set_length)
 {
-  if (c == '\n')
-    serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');
-  return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);
+  int8 *set_address;
+
+  for (set_address = first_address; set_length > 0; set_length--)
+    *(set_address++) = set_data;
+
+  return first_address;
 }
 
-/* 文字列送信 */
-int puts(unsigned char *str)
+void *
+memory_data_copy (void *store_first_address, const void *source_first_address,
+                  int32 copy_length)
 {
-  while (*str)
-    putc(*(str++));
-  return 0;
+  int8 *store_address = store_first_address;
+  const int8 *source_address = source_first_address;
+
+  for (; copy_length > 0; copy_length--)
+    *(store_address++) = *(source_address++);
+
+  return store_first_address;
 }

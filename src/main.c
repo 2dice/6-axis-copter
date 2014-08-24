@@ -1,15 +1,33 @@
 #include "defines.h"
-#include "serial.h"
 #include "lib.h"
+#include "pi.h"
 
-int main(void)
+static int
+init (void)
 {
-  serial_init(SERIAL_DEFAULT_DEVICE);
+  extern int data_start_load, data_start, edata, bss_start, ebss;
 
-  puts("Hello World!\n");
+  /* PA=VA処理転送 */
+  memory_data_copy (&data_start, &data_start_load,
+                    (long) &edata - (long) &data_start);
+  set_data_in_memory (&bss_start, 0, (long) &ebss - (long) &bss_start);
+
+  serial_init ();
+
+  put_string ("boot sucseed\n");
+  
+  return 0;
+}
+
+int
+main (void)
+{
+  init ();
 
   while (1)
-    ;
+    {
+      asm volatile ("sleep");
+    }
 
   return 0;
 }
