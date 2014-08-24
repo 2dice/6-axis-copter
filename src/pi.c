@@ -4,6 +4,7 @@
 #include "p_serial.h"
 #include "p_dram.h"
 #include "p_port.h"
+#include "p_timer.h"
 
 ////////////////////serial interface////////////////////
 void
@@ -111,6 +112,32 @@ put_dec (uint16 value)
     }
   put_string (dec_pointer + 1);
 }
+
+////////////////////timer interface////////////////////
+static void
+timer8_3ch_init (void)
+{
+  disable_TMR8ch3_interrupt ();
+  set_TMIO3_pin_function ();
+  select_TMR8ch3_function ();
+  set_TMR8ch3_counter_reset_condition ();
+  set_TMR8ch3A_compare_match_register ();
+  enable_TMR8ch3A_interrept ();
+  set_TMR8ch3_clock_source ();
+}
+
+void
+timer_init (void)
+{
+  timer8_3ch_init ();
+}
+
+void
+clear_TMR8ch3A_compare_match_flag ()
+{
+  clear_TMR8ch3_CMFA ();
+}
+
 
 ////////////////////bus controller interface////////////////////
 void

@@ -1,11 +1,15 @@
 #include "defines.h"
 #include "lib.h"
 #include "pi.h"
+#include "interrupt.h"
 
 static int
 init (void)
 {
   extern int16 data_start_load, data_start, edata, bss_start, ebss;
+
+  /* 割込を無効にする */
+  INTR_DISABLE;
 
   /* PA=VA処理転送 */
   memory_data_copy (&data_start, &data_start_load,
@@ -14,9 +18,13 @@ init (void)
 
   serial_init ();
   DRAM_init ();
+  timer_init ();
 
   put_string ("boot succeed\n");
   
+  /* 割込を有効にする */
+  INTR_ENABLE;
+
   return 0;
 }
 

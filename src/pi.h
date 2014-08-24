@@ -25,4 +25,9 @@ put_dec (uint16);
 void
 DRAM_init (void);
 
+void
+timer_init (void);
+void
+clear_TMR8ch3A_compare_match_flag (void);
+
 #endif

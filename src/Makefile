@@ -19,8 +19,8 @@ H8WRITE = ./tools/h8write/h8write
 # Linux:/dev/ttySx, Linux(USB):/dev/ttyUSBx, Windows:comX
 H8WRITE_SERDEV = /dev/cu.usbserial
 
-OBJS  = vector.o startup.o main.o
-OBJS += lib.o pi.o p_serial.o p_dram.o p_port.o
+OBJS  = vector.o startup.o main.o interrupt.o
+OBJS += lib.o pi.o p_serial.o p_dram.o p_port.o p_timer.o
 
 TARGET = scop
 
