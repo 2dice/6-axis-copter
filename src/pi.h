@@ -22,4 +22,7 @@ put_hex (uint32, int16);
 void
 put_dec (uint16);
 
+void
+DRAM_init (void);
+
 #endif

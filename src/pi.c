@@ -2,6 +2,8 @@
 #include "pi.h"
 
 #include "p_serial.h"
+#include "p_dram.h"
+#include "p_port.h"
 
 ////////////////////serial interface////////////////////
 void
@@ -108,4 +110,28 @@ put_dec (uint16 value)
       value_size--;
     }
   put_string (dec_pointer + 1);
+}
+
+////////////////////bus controller interface////////////////////
+void
+DRAM_init (void)
+{
+  set_area2_access_bit ();
+  set_DRAM_refresh_cycle ();
+  set_DRAM_refresh_timer_clock_source ();
+  set_DRAM_multiplex_controll ();
+  set_DRAM_CAS_pin_function ();
+  set_DRAM_refresh_enable ();
+  set_DRAM_precharge_cycle ();
+  set_DRAM_WR_wait_state ();
+  set_DRAM_refresh_wait_state ();
+  set_DRAM_area ();
+  set_DRAM_burst_access ();
+  set_DRAM_self_refresh_mode_in_software_standby ();
+  set_DRAM_RFSH_pin_function ();
+  DRAM_wait ();
+
+  set_PORT1_address_output ();
+  set_PORT2_address_output ();
+  set_PORT82_CS_output ();
 }
