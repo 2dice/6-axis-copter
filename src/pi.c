@@ -140,11 +140,26 @@ timer16_0ch_pwm_init (void)
   enable_TMR16ch0 ();
 }
 
+static void
+timer16_1ch_pwm_init (void)
+{
+  disable_TMR16ch1 ();
+  disable_TMR16ch1A_interrupt ();
+
+  set_TMR16ch1_clock_source ();
+  set_TMR16ch1_counter_reset_condition ();
+  set_TMR16ch1_compare_match_register ((uint8) 50);
+  set_TIOCA1_pin_function ();
+
+  enable_TMR16ch1 ();
+}
+
 void
 timer_init (void)
 {
   timer8_3ch_init ();
   timer16_0ch_pwm_init ();
+  timer16_1ch_pwm_init ();
 }
 
 void
