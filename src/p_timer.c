@@ -6,6 +6,12 @@
 #define TMR8_8TCSR3 (*(volatile uint8*)0xffff93)
 #define TMR8_8TCR3  (*(volatile uint8*)0xffff91)
 
+#define TMR16_GRB2L  (*(volatile uint8*)0xffff7F)
+#define TMR16_GRB2H  (*(volatile uint8*)0xffff7E)
+#define TMR16_GRA2L  (*(volatile uint8*)0xffff7D)
+#define TMR16_GRA2H  (*(volatile uint8*)0xffff7C)
+#define TMR16_16TCR2 (*(volatile uint8*)0xffff78)
+
 #define TMR16_GRB1L  (*(volatile uint8*)0xffff77)
 #define TMR16_GRB1H  (*(volatile uint8*)0xffff76)
 #define TMR16_GRA1L  (*(volatile uint8*)0xffff75)
@@ -181,4 +187,58 @@ void
 enable_TMR16ch1 (void)
 {
   TMR16_TSTR = TMR16_TSTR | 0x02;
+}
+
+////////////////////16bit_ch1////////////////////
+void
+disable_TMR16ch2 (void)
+{
+  TMR16_TSTR = TMR16_TSTR & ~0x04;
+}
+
+void
+disable_TMR16ch2A_interrupt (void)
+{
+  TMR16_TISRA = TMR16_TISRA & ~0x40;
+}
+
+void
+set_TMR16ch2_clock_source (void)
+{
+  /* 内部クロック/1 */
+  TMR16_16TCR2 = TMR16_16TCR2 & ~0x07;
+}
+
+void
+set_TMR16ch2_counter_reset_condition (void)
+{
+  /* GRA2のコンペアマッチでクリア */
+  TMR16_16TCR2 = TMR16_16TCR2 | 0x20;
+  TMR16_16TCR2 = TMR16_16TCR2 & ~0x40;
+}
+
+void
+set_TMR16ch2_compare_match_register (uint8 duty)
+{
+  if (duty < 100)
+  {
+    /* A:4us */
+    TMR16_GRA2H = 0;
+    TMR16_GRA2L = 100;
+    /* duty設定，50で50% */
+    TMR16_GRB2H = 0;
+    TMR16_GRB2L = duty;
+  }
+}
+
+void
+set_TIOCA2_pin_function (void)
+{
+  TMR16_TMDR = TMR16_TMDR | 0x04;
+}
+
+void
+enable_TMR16ch2 (void)
+{
+  TMR16_TSTR = TMR16_TSTR | 0x04;
 }

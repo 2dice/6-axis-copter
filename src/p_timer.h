@@ -50,4 +50,19 @@ set_TIOCA1_pin_function (void);
 void
 enable_TMR16ch1 (void);
 
+void
+disable_TMR16ch2 (void);
+void
+disable_TMR16ch2A_interrupt (void);
+void
+set_TMR16ch2_clock_source (void);
+void
+set_TMR16ch2_counter_reset_condition (void);
+void
+set_TMR16ch2_compare_match_register (uint8 duty);
+void
+set_TIOCA2_pin_function (void);
+void
+enable_TMR16ch2 (void);
+
 #endif
