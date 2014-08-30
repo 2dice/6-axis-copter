@@ -4,6 +4,17 @@
 #include "defines.h"
 
 void
+disable_TMR8ch0_interrupt (void);
+void
+set_TMIO0_pin_function (void);
+void
+set_TMR8ch0_counter_reset_condition (void);
+void
+set_TMR8ch0_compare_match_register (uint8 duty);
+void
+set_TMR8ch0_clock_source (void);
+
+void
 disable_TMR8ch3_interrupt (void);
 void
 set_TMIO3_pin_function (void);

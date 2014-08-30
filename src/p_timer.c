@@ -6,6 +6,11 @@
 #define TMR8_8TCSR3 (*(volatile uint8*)0xffff93)
 #define TMR8_8TCR3  (*(volatile uint8*)0xffff91)
 
+#define TMR8_TCORB0 (*(volatile uint8*)0xffff86)
+#define TMR8_TCORA0 (*(volatile uint8*)0xffff84)
+#define TMR8_8TCSR0 (*(volatile uint8*)0xffff82)
+#define TMR8_8TCR0  (*(volatile uint8*)0xffff80)
+
 #define TMR16_GRB2L  (*(volatile uint8*)0xffff7F)
 #define TMR16_GRB2H  (*(volatile uint8*)0xffff7E)
 #define TMR16_GRA2L  (*(volatile uint8*)0xffff7D)
@@ -28,6 +33,48 @@
 #define TMR16_TISRA  (*(volatile uint8*)0xffff64)
 #define TMR16_TMDR   (*(volatile uint8*)0xffff62)
 #define TMR16_TSTR   (*(volatile uint8*)0xffff60)
+
+////////////////////8bit_ch0////////////////////
+void
+disable_TMR8ch0_interrupt (void)
+{
+  TMR8_8TCR0 = TMR8_8TCR0 & ~0xE0;
+}
+
+void
+set_TMIO0_pin_function (void)
+{
+  /* コンベアマッチA:H,B:L */
+  TMR8_8TCSR0 = TMR8_8TCSR0 | 0x06;
+  TMR8_8TCSR0 = TMR8_8TCSR0 & ~0x09;
+}
+
+void
+set_TMR8ch0_counter_reset_condition (void)
+{
+  TMR8_8TCR0 = TMR8_8TCR0 & ~0x10;
+  TMR8_8TCR0 = TMR8_8TCR0 | 0x08;
+}
+
+void
+set_TMR8ch0_compare_match_register (uint8 duty)
+{
+  if (duty < 100)
+  {
+    /* A:32us(31.25kHz) */
+    /* TODO:モーター電流確認 */
+    TMR8_TCORA0 = 100;
+    /* duty設定，50で50% */
+    TMR8_TCORB0 = duty;
+  }
+}
+void
+set_TMR8ch0_clock_source (void)
+{
+  /* φ/8 */
+  TMR8_8TCR0 = TMR8_8TCR0 & ~0x06;
+  TMR8_8TCR0 = TMR8_8TCR0 | 0x01;
+}
 
 ////////////////////8bit_ch3////////////////////
 void
