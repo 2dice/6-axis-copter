@@ -20,4 +20,19 @@ set_TMR8ch3_clock_source (void);
 void
 clear_TMR8ch3_CMFA (void);
 
+void
+disable_TMR16ch0 (void);
+void
+disable_TMR16ch0A_interrupt (void);
+void
+set_TMR16ch0_clock_source (void);
+void
+set_TMR16ch0_counter_reset_condition (void);
+void
+set_TMR16ch0_compare_match_register (uint8 duty);
+void
+set_TIOCA0_pin_function (void);
+void
+enable_TMR16ch0 (void);
+
 #endif
