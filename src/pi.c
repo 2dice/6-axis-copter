@@ -135,6 +135,16 @@ timer8_1ch_pwm_init (void)
 }
 
 static void
+timer8_2ch_pwm_init (void)
+{
+  disable_TMR8ch2_interrupt ();
+  set_TMO2_pin_function ();
+  set_TMR8ch2_counter_reset_condition ();
+  set_TMR8ch2_compare_match_register ((uint8) 50);
+  set_TMR8ch2_clock_source ();
+}
+
+static void
 timer8_3ch_init (void)
 {
   disable_TMR8ch3_interrupt ();
@@ -193,6 +203,7 @@ timer_init (void)
 {
   timer8_0ch_pwm_init ();
   timer8_1ch_pwm_init ();
+  timer8_2ch_pwm_init ();
   timer8_3ch_init ();
   timer16_0ch_pwm_init ();
   timer16_1ch_pwm_init ();

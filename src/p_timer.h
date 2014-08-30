@@ -26,6 +26,17 @@ void
 set_TMR8ch1_clock_source (void);
 
 void
+disable_TMR8ch2_interrupt (void);
+void
+set_TMO2_pin_function (void);
+void
+set_TMR8ch2_counter_reset_condition (void);
+void
+set_TMR8ch2_compare_match_register (uint8 duty);
+void
+set_TMR8ch2_clock_source (void);
+
+void
 disable_TMR8ch3_interrupt (void);
 void
 set_TMIO3_pin_function (void);
