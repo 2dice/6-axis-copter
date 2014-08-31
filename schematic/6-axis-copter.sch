@@ -6612,6 +6612,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="RA3" library="passive" deviceset="BCN164AB" device="" value="1kJx4"/>
 <part name="IC19" library="IC" deviceset="PCA9665PW" device=""/>
 <part name="R22" library="passive" deviceset="R-US_" device="" value="1.5kJ"/>
+<part name="P+32" library="symbol" deviceset="4.5V" device=""/>
+<part name="R23" library="passive" deviceset="R-US_" device="" value="4.7kJ"/>
 </parts>
 <sheets>
 <sheet>
@@ -6641,7 +6643,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <vertex x="340.36" y="147.32"/>
 </polygon>
 <text x="332.74" y="266.7" size="2.54" layer="97" font="vector">H8 Pro Board</text>
-<text x="332.74" y="264.16" size="2.54" layer="97" font="vector">TODO:check board size(library package)</text>
+<text x="314.96" y="271.78" size="2.54" layer="97" font="vector">TODO:check board size(library package)</text>
 </plain>
 <instances>
 <instance part="M1" gate="G$1" x="627.38" y="254"/>
@@ -6823,6 +6825,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <attribute name="NAME" x="257.81" y="219.9386" size="1.778" layer="95"/>
 <attribute name="VALUE" x="265.43" y="220.218" size="1.778" layer="96"/>
 </instance>
+<instance part="P+32" gate="G$1" x="383.54" y="261.62"/>
+<instance part="R23" gate="G$1" x="383.54" y="251.46" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -8019,6 +8023,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="337.82" y1="228.6" x2="304.8" y2="228.6" width="0.1524" layer="91"/>
 <junction x="304.8" y="228.6"/>
 </segment>
+<segment>
+<pinref part="R23" gate="G$1" pin="2"/>
+<pinref part="P+32" gate="G$1" pin="4.5V"/>
+<wire x1="383.54" y1="256.54" x2="383.54" y2="259.08" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="N$13" class="0">
 <segment>
@@ -8631,9 +8640,13 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </net>
 <net name="!IRQ5" class="0">
 <segment>
-<wire x1="378.46" y1="243.84" x2="353.06" y2="243.84" width="0.1524" layer="91"/>
-<label x="375.92" y="243.84" size="1.778" layer="95"/>
+<wire x1="398.78" y1="243.84" x2="383.54" y2="243.84" width="0.1524" layer="91"/>
+<label x="393.7" y="243.84" size="1.778" layer="95"/>
 <pinref part="BD1" gate="G$1" pin="2-4"/>
+<pinref part="R23" gate="G$1" pin="1"/>
+<wire x1="383.54" y1="243.84" x2="353.06" y2="243.84" width="0.1524" layer="91"/>
+<wire x1="383.54" y1="246.38" x2="383.54" y2="243.84" width="0.1524" layer="91"/>
+<junction x="383.54" y="243.84"/>
 </segment>
 <segment>
 <pinref part="IC19" gate="G$1" pin="!INT"/>
