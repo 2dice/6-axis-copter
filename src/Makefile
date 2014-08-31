@@ -36,7 +36,7 @@ LFLAGS = -static -T ld.scr -L.
 .SUFFIXES: .c .o
 .SUFFIXES: .s .o
 
-all :		$(TARGET)
+all :		$(TARGET) tags
 
 $(TARGET) :	$(OBJS)
 		$(CC) $(OBJS) -o $(TARGET) $(CFLAGS) $(LFLAGS)
@@ -56,6 +56,9 @@ image :		$(TARGET).mot
 
 write :		$(TARGET).mot
 		$(H8WRITE) -3069 -f25 $(TARGET).mot $(H8WRITE_SERDEV)
+
+tags  :
+		ctags -e -R
 
 clean :
 		rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
