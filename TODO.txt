@@ -22,6 +22,8 @@ x	バッテリーを2セルのリポにしてコネクタ追加
 暫定構成:
 	バッテリー[リチウムポリマーバッテリー3.7Vx2直列]充電器購入
 	http://www.kkhobby.com/SHOP/BT167.html
+	コネクタ[s3B-XH-A]
+	http://www.marutsu.co.jp/shohin_59181/
 	リセッタブルヒューズ[MF-SM300-2]
 	逆接Di[SR54F]
 	電流センサ[LT6106CS5]
