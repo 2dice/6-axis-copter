@@ -19,6 +19,7 @@ init (void)
   serial_init ();
   DRAM_init ();
   timer_init ();
+  ADC_init ();
 
   put_string ("boot succeed\n");
   

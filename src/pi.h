@@ -30,4 +30,9 @@ timer_init (void);
 void
 clear_TMR8ch3A_compare_match_flag (void);
 
+void
+ADC_init (void);
+uint8
+get_distance_1 (void);
+
 #endif

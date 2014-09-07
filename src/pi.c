@@ -5,6 +5,7 @@
 #include "p_dram.h"
 #include "p_port.h"
 #include "p_timer.h"
+#include "p_ADC.h"
 
 ////////////////////serial interface////////////////////
 void
@@ -216,6 +217,21 @@ clear_TMR8ch3A_compare_match_flag ()
   clear_TMR8ch3_CMFA ();
 }
 
+////////////////////AD converter interface////////////////////
+void
+ADC_init (void)
+{
+  disable_ADC ();
+  disable_ADC_interrupt ();
+  set_ADC_scan_mode ();
+  set_ADC_clock_source ();
+}
+
+uint8
+get_distance_1 (void)
+{
+  return get_AN0 ();
+}
 
 ////////////////////bus controller interface////////////////////
 void
