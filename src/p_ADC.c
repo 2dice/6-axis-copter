@@ -8,6 +8,18 @@
 
 #define AD_CONVERTING (~ADC_ADCSR & 0x80)
 
+enum AD_chanel
+{
+  AN0,
+  AN1,
+  AN2,
+  AN3,
+  AN4,
+  AN5,
+  AN6,
+  AN7
+};
+
 void
 disable_ADC (void)
 {
@@ -32,21 +44,22 @@ set_ADC_clock_source (void)
   ADC_ADCSR = ADC_ADCSR | 0x08;
 }
 
-/* TODO:チャネルセレクトをもうちょいうまく書く */
-/* enumで引数にチャネルを渡してcaseで振り分け，defineでセット? */
 static void
-select_ADC_chanel_0 (void)
+select_ADC_chanel (uint8 chanel)
 {
-  ADC_ADCSR = ADC_ADCSR & ~0x07;
+  switch (chanel)
+  {
+    case AN0:
+      ADC_ADCSR = ADC_ADCSR & ~0x07;
+      break;
+    case AN1:
+      ADC_ADCSR = ADC_ADCSR & ~0x06;
+      ADC_ADCSR = ADC_ADCSR | 0x01;
+      break;
+    default :
+      break;
+  }
 }
-
-static void
-select_ADC_chanel_1 (void)
-{
-  ADC_ADCSR = ADC_ADCSR & ~0x06;
-  ADC_ADCSR = ADC_ADCSR | 0x01;
-}
-/**********************************************/
 
 static void
 enable_ADC (void)
@@ -72,17 +85,16 @@ AD_convert (void)
 uint8
 get_AN0 (void)
 {
-  select_ADC_chanel_0 ();
+  select_ADC_chanel (AN0);
   AD_convert ();
 
-  /* TODO:retuenをdefineで */
   return ADC_ADDRAH;
 }
 
 uint8
 get_AN1 (void)
 {
-  select_ADC_chanel_1 ();
+  select_ADC_chanel (AN1);
   AD_convert ();
 
   /* TODO:retuenをdefineで */
