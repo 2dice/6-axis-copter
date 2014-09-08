@@ -239,6 +239,41 @@ get_distance_2 (void)
   return get_AN1 ();
 }
 
+uint8
+get_distance_3 (void)
+{
+  return get_AN2 ();
+}
+
+uint8
+get_distance_4 (void)
+{
+  return get_AN3 ();
+}
+uint8
+get_distance_5 (void)
+{
+  return get_AN4 ();
+}
+
+uint8
+get_distance_6 (void)
+{
+  return get_AN5 ();
+}
+
+uint8
+get_bat_V (void)
+{
+  return get_AN6 ();
+}
+
+uint8
+get_bat_I (void)
+{
+  return get_AN7 ();
+}
+
 ////////////////////bus controller interface////////////////////
 void
 DRAM_init (void)

@@ -36,5 +36,17 @@ uint8
 get_distance_1 (void);
 uint8
 get_distance_2 (void);
+uint8
+get_distance_3 (void);
+uint8
+get_distance_4 (void);
+uint8
+get_distance_5 (void);
+uint8
+get_distance_6 (void);
+uint8
+get_bat_V (void);
+uint8
+get_bat_I (void);
 
 #endif

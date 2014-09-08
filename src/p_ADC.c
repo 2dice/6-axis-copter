@@ -3,6 +3,8 @@
 #include "pi.h"
 
 #define ADC_ADCSR  (*(volatile uint8*)0xffffe8)
+#define ADC_ADDRDH (*(volatile uint8*)0xffffe6)
+#define ADC_ADDRCH (*(volatile uint8*)0xffffe4)
 #define ADC_ADDRBH (*(volatile uint8*)0xffffe2)
 #define ADC_ADDRAH (*(volatile uint8*)0xffffe0)
 
@@ -56,6 +58,29 @@ select_ADC_chanel (uint8 chanel)
       ADC_ADCSR = ADC_ADCSR & ~0x06;
       ADC_ADCSR = ADC_ADCSR | 0x01;
       break;
+    case AN2:
+      ADC_ADCSR = ADC_ADCSR & ~0x05;
+      ADC_ADCSR = ADC_ADCSR | 0x02;
+      break;
+    case AN3:
+      ADC_ADCSR = ADC_ADCSR & ~0x04;
+      ADC_ADCSR = ADC_ADCSR | 0x03;
+      break;
+    case AN4:
+      ADC_ADCSR = ADC_ADCSR & ~0x03;
+      ADC_ADCSR = ADC_ADCSR | 0x04;
+      break;
+    case AN5:
+      ADC_ADCSR = ADC_ADCSR & ~0x02;
+      ADC_ADCSR = ADC_ADCSR | 0x05;
+      break;
+    case AN6:
+      ADC_ADCSR = ADC_ADCSR & ~0x01;
+      ADC_ADCSR = ADC_ADCSR | 0x06;
+      break;
+    case AN7:
+      ADC_ADCSR = ADC_ADCSR | 0x07;
+      break;
     default :
       break;
   }
@@ -97,6 +122,59 @@ get_AN1 (void)
   select_ADC_chanel (AN1);
   AD_convert ();
 
-  /* TODO:retuenをdefineで */
   return ADC_ADDRBH;
+}
+
+uint8
+get_AN2 (void)
+{
+  select_ADC_chanel (AN2);
+  AD_convert ();
+
+  return ADC_ADDRCH;
+}
+
+uint8
+get_AN3 (void)
+{
+  select_ADC_chanel (AN3);
+  AD_convert ();
+
+  return ADC_ADDRDH;
+}
+
+uint8
+get_AN4 (void)
+{
+  select_ADC_chanel (AN4);
+  AD_convert ();
+
+  return ADC_ADDRAH;
+}
+
+uint8
+get_AN5 (void)
+{
+  select_ADC_chanel (AN5);
+  AD_convert ();
+
+  return ADC_ADDRBH;
+}
+
+uint8
+get_AN6 (void)
+{
+  select_ADC_chanel (AN6);
+  AD_convert ();
+
+  return ADC_ADDRCH;
+}
+
+uint8
+get_AN7 (void)
+{
+  select_ADC_chanel (AN7);
+  AD_convert ();
+
+  return ADC_ADDRDH;
 }

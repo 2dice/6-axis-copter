@@ -16,5 +16,17 @@ uint8
 get_AN0 (void);
 uint8
 get_AN1 (void);
+uint8
+get_AN2 (void);
+uint8
+get_AN3 (void);
+uint8
+get_AN4 (void);
+uint8
+get_AN5 (void);
+uint8
+get_AN6 (void);
+uint8
+get_AN7 (void);
 
 #endif
