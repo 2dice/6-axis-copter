@@ -10,4 +10,7 @@ set_PORT2_address_output (void);
 void
 set_PORT82_CS_output (void);
 
+void
+motor_driver_enable (void);
+
 #endif

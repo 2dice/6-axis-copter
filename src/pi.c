@@ -200,15 +200,9 @@ timer16_2ch_pwm_init (void)
 }
 
 void
-timer_init (void)
+internal_timer_init (void)
 {
-  timer8_0ch_pwm_init ();
-  timer8_1ch_pwm_init ();
-  timer8_2ch_pwm_init ();
   timer8_3ch_init ();
-  timer16_0ch_pwm_init ();
-  timer16_1ch_pwm_init ();
-  timer16_2ch_pwm_init ();
 }
 
 void
@@ -216,6 +210,21 @@ clear_TMR8ch3A_compare_match_flag ()
 {
   clear_TMR8ch3_CMFA ();
 }
+
+////////////////////motor driver interface////////////////////
+void
+motor_driver_init (void)
+{
+  timer8_0ch_pwm_init ();
+  timer8_1ch_pwm_init ();
+  timer8_2ch_pwm_init ();
+  timer16_0ch_pwm_init ();
+  timer16_1ch_pwm_init ();
+  timer16_2ch_pwm_init ();
+
+  motor_driver_enable ();
+}
+
 
 ////////////////////AD converter interface////////////////////
 void

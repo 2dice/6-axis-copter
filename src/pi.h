@@ -26,9 +26,12 @@ void
 DRAM_init (void);
 
 void
-timer_init (void);
+internal_timer_init (void);
 void
 clear_TMR8ch3A_compare_match_flag (void);
+
+void
+motor_driver_init (void);
 
 void
 ADC_init (void);
