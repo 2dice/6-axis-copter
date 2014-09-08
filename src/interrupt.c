@@ -14,6 +14,7 @@ CMIA3 (void)
   if (timer_count >= 1000)
     {
       put_dec ((uint16) get_distance_1 ());
+      put_dec ((uint16) get_distance_2 ());
       put_string ("\n10sec\n");
       timer_count = 0;
     }

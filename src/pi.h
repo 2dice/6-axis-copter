@@ -34,5 +34,7 @@ void
 ADC_init (void);
 uint8
 get_distance_1 (void);
+uint8
+get_distance_2 (void);
 
 #endif

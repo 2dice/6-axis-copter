@@ -233,6 +233,12 @@ get_distance_1 (void)
   return get_AN0 ();
 }
 
+uint8
+get_distance_2 (void)
+{
+  return get_AN1 ();
+}
+
 ////////////////////bus controller interface////////////////////
 void
 DRAM_init (void)

@@ -14,5 +14,7 @@ set_ADC_clock_source (void);
 
 uint8
 get_AN0 (void);
+uint8
+get_AN1 (void);
 
 #endif
