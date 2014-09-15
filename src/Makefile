@@ -58,6 +58,7 @@ write :		$(TARGET).mot
 		$(H8WRITE) -3069 -f25 $(TARGET).mot $(H8WRITE_SERDEV)
 
 tags  :
+		rm -f TAGS
 		ctags -e -R
 
 clean :
