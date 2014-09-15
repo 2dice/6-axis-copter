@@ -8,8 +8,9 @@ TODO:
 	加速度
 	角速度
 ・回路図
-x	H8-Proボードのサイズ確認・ライブラリのpackageに反映
-x	バッテリーを2セルのリポにしてコネクタ追加
+	H8-Proボードのサイズ確認・ライブラリのpackageに反映
+	バッテリーを2セルのリポにしてコネクタ追加
+	モーター前にコイル追加
 ・部品表作成
 ・図面作成
 	プロペラ・モーター追加
@@ -32,6 +33,7 @@ x	バッテリーを2セルのリポにしてコネクタ追加
 		http://www.rubberpowerplane.com/pg12.html
 		http://www.kkhobby.com/SHOP/PP031.html
 	モータ[MK07-3.3]_x6
+	リプル抑制コイル[LHL08NB470K]x3[LHL08NB101K]x3
 	測距センサ[GP2Y0A21YK]_x6_AN0~5
 	PCB
 		マイコン[h8/3069f]x1(16x16)
