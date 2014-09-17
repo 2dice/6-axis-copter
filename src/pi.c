@@ -8,8 +8,8 @@
 #include "p_ADC.h"
 
 ////////////////////serial interface////////////////////
-void
-serial_init (void)
+static void
+debug_serial_init (void)
 {
   disable_SCI0_TxRx ();
   disable_SCI0_serial_interrupt ();
@@ -22,7 +22,27 @@ serial_init (void)
   enable_SCI0_TxRx ();
 }
 
+static void
+zigbee_serial_init (void)
+{
+  disable_SCI2_TxRx ();
+  disable_SCI2_serial_interrupt ();
+
+  set_SCI2_clock_source_and_SCK_port_status ();
+  set_SCI2_serial_modes ();
+  set_SCI2_bitrate ();
+
+  enable_SCI2_TxRx ();
+}
+
 void
+serial_init (void)
+{
+  debug_serial_init ();
+  zigbee_serial_init ();
+}
+
+static void
 put_char (uint8 c)
 {
   if (c == '\n')
@@ -36,7 +56,7 @@ put_byte_data (uint8 c)
   serial_send_byte (c);
 }
 
-uint8
+static uint8
 get_char (void)
 {
   uint8 c = serial_recv_byte ();
