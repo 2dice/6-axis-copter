@@ -18,7 +18,7 @@ debug_serial_init (void)
   set_SCI0_serial_modes ();
   set_SCI0_bitrate ();
 
-  enable_SCI0_serial_interrept ();
+  /* enable_SCI0_serial_interrept (); */
   enable_SCI0_TxRx ();
 }
 
@@ -32,6 +32,7 @@ zigbee_serial_init (void)
   set_SCI2_serial_modes ();
   set_SCI2_bitrate ();
 
+  enable_SCI2_serial_interrupt ();
   enable_SCI2_TxRx ();
 }
 
@@ -56,12 +57,12 @@ put_byte_data (uint8 c)
   serial_send_byte (c);
 }
 
-static uint8
+uint8
 get_char (void)
 {
   uint8 c = serial_recv_byte ();
   c = (c == '\r') ? '\n' : c;
-  put_char (c);
+
   return c;
 }
 

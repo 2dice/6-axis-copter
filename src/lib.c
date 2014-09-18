@@ -25,3 +25,23 @@ memory_data_copy (void *store_first_address, const void *source_first_address,
 
   return store_first_address;
 }
+
+////////////////////string library////////////////////
+int16
+string_compare_at_arbitrary_length (const int8 *A_pointer,
+                                    const int8 *B_pointer, int16 compare_length)
+//return  0 : A=B
+//return  1 : A>B(lowest address in different character by character-code)
+//return -1 : A<B(lowest address in different character by character-code)
+{
+  while ((*A_pointer || *B_pointer) && (compare_length > 0))
+    {
+      if (*A_pointer != *B_pointer)
+        return (*A_pointer > *B_pointer) ? 1 : -1;
+      A_pointer++;
+      B_pointer++;
+      compare_length--;
+    }
+
+  return 0;
+}

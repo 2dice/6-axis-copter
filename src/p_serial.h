@@ -36,6 +36,8 @@ set_SCI2_serial_modes (void);
 void
 set_SCI2_bitrate (void);
 void
+enable_SCI2_serial_interrupt (void);
+void
 enable_SCI2_TxRx (void);
 
 void

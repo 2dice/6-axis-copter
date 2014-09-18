@@ -8,6 +8,8 @@ serial_init (void);
 void
 put_byte_data (uint8);
 uint8
+get_char (void);
+uint8
 get_byte_data (void);
 void
 put_string (int8 *);

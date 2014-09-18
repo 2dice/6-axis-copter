@@ -131,6 +131,12 @@ set_SCI2_bitrate (void)
 }
 
 void
+enable_SCI2_serial_interrupt (void)
+{
+  SCI2_SCR = SCI2_SCR | 0x40;
+}
+
+void
 enable_SCI2_TxRx (void)
 {
   SCI2_SCR = SCI2_SCR | 0x30;
