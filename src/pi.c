@@ -11,15 +11,15 @@
 static void
 debug_serial_init (void)
 {
-  disable_SCI0_TxRx ();
-  disable_SCI0_serial_interrupt ();
+  disable_SCI1_TxRx ();
+  disable_SCI1_serial_interrupt ();
 
-  set_SCI0_clock_source_and_SCK_port_status ();
-  set_SCI0_serial_modes ();
-  set_SCI0_bitrate ();
+  set_SCI1_clock_source_and_SCK_port_status ();
+  set_SCI1_serial_modes ();
+  set_SCI1_bitrate ();
 
-  /* enable_SCI0_serial_interrept (); */
-  enable_SCI0_TxRx ();
+  /* enable_SCI1_serial_interrept (); */
+  enable_SCI1_TxRx ();
 }
 
 static void

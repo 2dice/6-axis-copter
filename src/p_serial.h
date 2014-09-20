@@ -3,21 +3,21 @@
 
 #include "defines.h"
 
-////////////////////SCI0////////////////////
+////////////////////SCI1////////////////////
 void
-disable_SCI0_TxRx (void);
+disable_SCI1_TxRx (void);
 void
-disable_SCI0_serial_interrupt (void);
+disable_SCI1_serial_interrupt (void);
 void
-set_SCI0_clock_source_and_SCK_port_status (void);
+set_SCI1_clock_source_and_SCK_port_status (void);
 void
-set_SCI0_serial_modes (void);
+set_SCI1_serial_modes (void);
 void
-set_SCI0_bitrate (void);
+set_SCI1_bitrate (void);
 void
-enable_SCI0_serial_interrept (void);
+enable_SCI1_serial_interrept (void);
 void
-enable_SCI0_TxRx (void);
+enable_SCI1_TxRx (void);
 
 void
 d_serial_send_byte (uint8 c);
