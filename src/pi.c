@@ -6,6 +6,7 @@
 #include "p_port.h"
 #include "p_timer.h"
 #include "p_ADC.h"
+#include "p_I2C.h"
 
 ////////////////////serial interface////////////////////
 static void
@@ -326,4 +327,59 @@ DRAM_init (void)
   set_PORT1_address_output ();
   set_PORT2_address_output ();
   set_PORT82_CS_output ();
+}
+
+static void
+acceleration_init (void)
+{
+  set_data_format ();
+  enable_acceleration ();
+}
+
+void
+I2C_init (void)
+{
+  set_area1_access_bit ();
+  set_PORT1_address_output ();
+  set_PORT83_CS_output ();
+
+  I2C_soft_reset ();
+  set_I2C_datarate ();
+  set_I2C_mode ();
+  enable_I2C ();
+  I2C_wait ();
+
+  acceleration_init ();
+}
+
+/* TODO:get関数をenumのXYZを引数にして統合 */
+/* TODO:returnで直接関数を返すように変更 */
+int16
+get_acceleration_x (void)
+{
+  int16 acceleration_x = 0;
+
+  acceleration_x = read_acceleration_x ();
+
+  return acceleration_x;
+}
+
+int16
+get_acceleration_y (void)
+{
+  int16 acceleration_y = 0;
+
+  acceleration_y = read_acceleration_y ();
+
+  return acceleration_y;
+}
+
+int16
+get_acceleration_z (void)
+{
+  int16 acceleration_z = 0;
+
+  acceleration_z = read_acceleration_z ();
+
+  return acceleration_z;
 }

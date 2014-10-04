@@ -12,41 +12,49 @@ CMIA3 (void)
   clear_TMR8ch3A_compare_match_flag ();
   timer_count++;
 
-  if (timer_count >= 100)
-    {
-      put_string ("D1:");
-      put_dec ((uint16) get_distance_1 ());
-      put_string ("\n");
+  if (timer_count >= 10)
+  {
+    put_string ("D1:");
+    put_dec ((uint16) get_distance_1 ());
 
-      put_string ("D2:");
-      put_dec ((uint16) get_distance_2 ());
-      put_string ("\n");
+    put_string (" D2:");
+    put_dec ((uint16) get_distance_2 ());
 
-      put_string ("D3:");
-      put_dec ((uint16) get_distance_3 ());
-      put_string ("\n");
+    put_string (" D3:");
+    put_dec ((uint16) get_distance_3 ());
 
-      put_string ("D4:");
-      put_dec ((uint16) get_distance_4 ());
-      put_string ("\n");
+    put_string (" D4:");
+    put_dec ((uint16) get_distance_4 ());
 
-      put_string ("D5:");
-      put_dec ((uint16) get_distance_5 ());
-      put_string ("\n");
+    put_string (" D5:");
+    put_dec ((uint16) get_distance_5 ());
 
-      put_string ("D6:");
-      put_dec ((uint16) get_distance_6 ());
-      put_string ("\n");
+    put_string (" D6:");
+    put_dec ((uint16) get_distance_6 ());
+    put_string ("\n");
 
-      put_string ("BV:");
-      put_dec ((uint16) get_bat_V ());
-      put_string ("\n");
+    put_string (" BV:");
+    put_dec ((uint16) get_bat_V ());
 
-      put_string ("BI:");
-      put_dec ((uint16) get_bat_I ());
-      put_string ("\n");
-      timer_count = 0;
-    }
+    put_string (" BI:");
+    put_dec ((uint16) get_bat_I ());
+    put_string ("\n");
+
+    put_string ("  AX:");
+    put_dec (get_acceleration_x ());
+    /* put_hex ((uint32)get_acceleration_x (), 4); */
+
+    put_string (" AY:");
+    put_dec (get_acceleration_y ());
+    /* put_hex ((uint32)get_acceleration_y (), 4); */
+
+    put_string (" AZ:");
+    put_dec (get_acceleration_z ());
+    /* put_hex ((uint32)get_acceleration_z (), 4); */
+    put_string ("\n");
+
+    timer_count = 0;
+  }
 
 }
 

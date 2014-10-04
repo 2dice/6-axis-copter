@@ -21,6 +21,7 @@ init (void)
   internal_timer_init ();
   motor_driver_init ();
   ADC_init ();
+  I2C_init ();
 
   put_string ("boot succeed\n");
   

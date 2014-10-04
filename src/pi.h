@@ -50,4 +50,14 @@ get_bat_V (void);
 uint8
 get_bat_I (void);
 
+void
+I2C_init (void);
+
+int16
+get_acceleration_x (void);
+int16
+get_acceleration_y (void);
+int16
+get_acceleration_z (void);
+
 #endif

@@ -10,6 +10,7 @@
 void
 set_area2_access_bit (void)
 {
+  /* TODO:port.cにまとめる */
   ABWCR = ABWCR | 0x04;
 }
 
