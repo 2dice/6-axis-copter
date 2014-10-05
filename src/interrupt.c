@@ -53,6 +53,19 @@ CMIA3 (void)
     /* put_hex ((uint32)get_acceleration_z (), 4); */
     put_string ("\n");
 
+    put_string ("   GX:");
+    put_dec (get_gyroscope_x ());
+    /* put_hex ((uint32)get_gyroscope_x (), 4); */
+
+    put_string (" GY:");
+    put_dec (get_gyroscope_y ());
+    /* put_hex ((uint32)get_gyroscope_y (), 4); */
+
+    put_string (" GZ:");
+    put_dec (get_gyroscope_z ());
+    /* put_hex ((uint32)get_gyroscope_z (), 4); */
+    put_string ("\n");
+
     timer_count = 0;
   }
 

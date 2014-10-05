@@ -20,7 +20,7 @@ I2C_wait (void);
 void
 enable_acceleration (void);
 void
-set_data_format (void);
+set_acceleration_data_format (void);
 
 int16
 read_acceleration_x (void);
@@ -28,5 +28,19 @@ int16
 read_acceleration_y (void);
 int16
 read_acceleration_z (void);
+
+void
+read_gyroscope_WAI (void);
+void
+set_gyroscope_fullscale (void);
+void
+enable_gyroscope (void);
+
+int16
+read_gyroscope_x (void);
+int16
+read_gyroscope_y (void);
+int16
+read_gyroscope_z (void);
 
 #endif

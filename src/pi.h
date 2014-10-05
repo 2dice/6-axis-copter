@@ -52,12 +52,17 @@ get_bat_I (void);
 
 void
 I2C_init (void);
-
 int16
 get_acceleration_x (void);
 int16
 get_acceleration_y (void);
 int16
 get_acceleration_z (void);
+int16
+get_gyroscope_x (void);
+int16
+get_gyroscope_y (void);
+int16
+get_gyroscope_z (void);
 
 #endif

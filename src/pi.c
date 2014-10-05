@@ -332,8 +332,16 @@ DRAM_init (void)
 static void
 acceleration_init (void)
 {
-  set_data_format ();
+  set_acceleration_data_format ();
   enable_acceleration ();
+}
+
+static void
+gyroscope_init (void)
+{
+  read_gyroscope_WAI ();
+  set_gyroscope_fullscale ();
+  enable_gyroscope ();
 }
 
 void
@@ -350,6 +358,8 @@ I2C_init (void)
   I2C_wait ();
 
   acceleration_init ();
+
+  gyroscope_init ();
 }
 
 /* TODO:get関数をenumのXYZを引数にして統合 */
@@ -382,4 +392,34 @@ get_acceleration_z (void)
   acceleration_z = read_acceleration_z ();
 
   return acceleration_z;
+}
+
+int16
+get_gyroscope_x (void)
+{
+  int16 gyroscope_x = 0;
+
+  gyroscope_x = read_gyroscope_x ();
+
+  return gyroscope_x;
+}
+
+int16
+get_gyroscope_y (void)
+{
+  int16 gyroscope_y = 0;
+
+  gyroscope_y = read_gyroscope_y ();
+
+  return gyroscope_y;
+}
+
+int16
+get_gyroscope_z (void)
+{
+  int16 gyroscope_z = 0;
+
+  gyroscope_z = read_gyroscope_z ();
+
+  return gyroscope_z;
 }
