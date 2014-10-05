@@ -29,12 +29,9 @@
 #define ACC_DATA_FORMAT ((uint8)0x31)
 #define ACC_POWER_CTL   ((uint8)0x2D)
 /* Gyroscope register address */
-#define GYRO_OUT_Z_H    ((uint8)0x2D)
-#define GYRO_OUT_Z_L    ((uint8)0x2C)
-#define GYRO_OUT_Y_H    ((uint8)0x2B)
-#define GYRO_OUT_Y_L    ((uint8)0x2A)
-#define GYRO_OUT_X_H    ((uint8)0x29)
-#define GYRO_OUT_X_L    ((uint8)0x28)
+#define GYRO_OUT_Z_L    ((uint8)0xAC)
+#define GYRO_OUT_Y_L    ((uint8)0xAA)
+#define GYRO_OUT_X_L    ((uint8)0xA8)
 #define GYRO_CTRL_REG4  ((uint8)0x23)
 #define GYRO_CTRL_REG1  ((uint8)0x20)
 #define GYRO_WHO_AM_I   ((uint8)0x0F)
@@ -304,18 +301,9 @@ int16
 read_gyroscope_x (void)
 {
   int16 gyro_x = 0;
-  int16 gyro_x0 = 0;
-  int16 gyro_x1 = 0;
 
-  /* 2バイト連続読み出しがうまく行かなかったため2回に分けた． */
-  /* L→Hの間にレジスタ値が更新される可能性があるため対策検討が必要 */
-  /* TODO:引数にレジスタアドレスを持つ関数に分離 */
   send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_X_L);
-  gyro_x0 = recv_I2C_8bit_data (GYRO_READ_SID);
-  send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_X_H);
-  gyro_x1 = recv_I2C_8bit_data (GYRO_READ_SID);
-
-  gyro_x = (gyro_x1 << 8) + gyro_x0;
+  gyro_x = recv_I2C_16bit_data (GYRO_READ_SID);
 
   return gyro_x;
 }
@@ -324,17 +312,9 @@ int16
 read_gyroscope_y (void)
 {
   int16 gyro_y = 0;
-  int16 gyro_y0 = 0;
-  int16 gyro_y1 = 0;
 
-  /* 2バイト連続読み出しがうまく行かなかったため2回に分けた． */
-  /* L→Hの間にレジスタ値が更新される可能性があるため対策検討が必要 */
   send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_Y_L);
-  gyro_y0 = recv_I2C_8bit_data (GYRO_READ_SID);
-  send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_Y_H);
-  gyro_y1 = recv_I2C_8bit_data (GYRO_READ_SID);
-
-  gyro_y = (gyro_y1 << 8) + gyro_y0;
+  gyro_y = recv_I2C_16bit_data (GYRO_READ_SID);
 
   return gyro_y;
 }
@@ -343,17 +323,9 @@ int16
 read_gyroscope_z (void)
 {
   int16 gyro_z = 0;
-  int16 gyro_z0 = 0;
-  int16 gyro_z1 = 0;
 
-  /* 2バイト連続読み出しがうまく行かなかったため2回に分けた． */
-  /* L→Hの間にレジスタ値が更新される可能性があるため対策検討が必要 */
   send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_Z_L);
-  gyro_z0 = recv_I2C_8bit_data (GYRO_READ_SID);
-  send_I2C_read_address (GYRO_WRITE_SID, GYRO_OUT_Z_H);
-  gyro_z1 = recv_I2C_8bit_data (GYRO_READ_SID);
-
-  gyro_z = (gyro_z1 << 8) + gyro_z0;
+  gyro_z = recv_I2C_16bit_data (GYRO_READ_SID);
 
   return gyro_z;
 }
