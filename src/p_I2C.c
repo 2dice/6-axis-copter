@@ -200,18 +200,18 @@ disable_ACK (void)
 static int16
 recv_I2C_16bit_data (uint8 SID)
 {
-  int16 acc_x = 0;
-  int16 acc_x0 = 0;
-  int16 acc_x1 = 0;
+  int16 data = 0;
+  int16 data0 = 0;
+  int16 data1 = 0;
   
   send_REPEAT_START_and_SID (SID);
   enable_ACK ();
-  acc_x0 = fetch_and_recv_I2C_data ();
+  data0 = fetch_and_recv_I2C_data ();
   disable_ACK ();
-  acc_x1 = fetch_and_recv_I2C_data ();
+  data1 = fetch_and_recv_I2C_data ();
   send_I2C_STOP_BIT ();
 
-  acc_x = (acc_x1 << 8) + acc_x0;
+  data = (data1 << 8) + data0;
 
   return data;
 }
