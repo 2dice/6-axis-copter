@@ -111,7 +111,7 @@ put_hex (uint32 value, int16 digit_number)
   *(hex_pointer--) = '\0';
   while (digit_number)
     {
-      *(hex_pointer--) = "0123456789abcdef"[value & 0xf];
+      *(hex_pointer--) = "0123456789ABCDEF"[value & 0xf];
       value >>= 4;
       digit_number--;
     }
