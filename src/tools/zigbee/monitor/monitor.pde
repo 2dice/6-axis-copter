@@ -3,6 +3,11 @@ Serial myPort;
 
 int SENSOR_NUM = 1;
 final float ACC_SENSOR_DATA_TO_G = 0.003688335639;
+final int DATA_NUM = 12000;
+
+int[] D1 = new int[DATA_NUM];
+float[] AZf = new float[DATA_NUM];
+int i = 0;
 
 int[] sensors = new int[SENSOR_NUM];
 int counter;
@@ -57,34 +62,37 @@ void serialEvent(Serial myPort)
 
   if (myString == null) {return;}
 
-  // D1
-  String[] D1_String = match(myString, "D1:([0-9]{1,10})");
-  if (D1_String != null)
-  {
-    int D1;
+  storeSensorData(myString);
+  i++;
+  if (i <= 12000){i=0;}
 
-    D1 = int(D1_String[1]);
-    // println("D1="+ D1);
-    sensors[0] = D1;
+  // println(myString);
+}
+
+void storeSensorData(String str)
+{
+  String[] sensor_data;
+
+  // D1
+  sensor_data = match(str, "D1:([0-9]{1,10})");
+  if (sensor_data != null)
+  {
+    D1[i] = int(sensor_data[1]);
+    println("D1="+ D1[i]);
+    sensors[0] = D1[i];
   }
 
   // AZ
-  String[] AZ_String = match(myString, "AZ:([0-9 A-F]{1,10})");
-  if (AZ_String != null)
+  sensor_data = match(str, "AZ:([0-9 A-F]{1,10})");
+  if (sensor_data != null)
   {
-    int AZ[];
-    AZ = new int[12000];
-    int i = 0;
-    float AZf;
-
-    AZ[i] = unhex(AZ_String[1]);
+    int AZ = 0;
+    
+    AZ = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
-    AZ[i] = AZ[i] << 16;
-    AZ[i] = AZ[i] >> 16;
-    AZf = AZ[i] * ACC_SENSOR_DATA_TO_G;
-    println("AZ="+ AZf + "g");
-    i++;
-    if (i <= 12000){i=0;}
+    AZ = AZ << 16;
+    AZ = AZ >> 16;
+    AZf[i] = AZ * ACC_SENSOR_DATA_TO_G;
+    println("AZ="+ AZf[i] + "g");
   }
-  // println(myString);
 }
