@@ -5,6 +5,8 @@ int SENSOR_NUM = 1;
 final float ACC_SENSOR_DATA_TO_G = 0.003688335639;
 final float GYRO_SENSOR_DATA_TO_DEG = 0.07;
 final int DATA_NUM = 12000;
+final float TIME_CYCLE= 0.1;
+float AX_ZERO = 0;
 
 int[] D1 = new int[DATA_NUM];
 int[] D2 = new int[DATA_NUM];
@@ -17,11 +19,20 @@ int[] BI = new int[DATA_NUM];
 float[] AX = new float[DATA_NUM];
 float[] AY = new float[DATA_NUM];
 float[] AZ = new float[DATA_NUM];
+float[] VX = new float[DATA_NUM];
+float[] VY = new float[DATA_NUM];
+float[] VZ = new float[DATA_NUM];
+float[] PX = new float[DATA_NUM];
+float[] PY = new float[DATA_NUM];
+float[] PZ = new float[DATA_NUM];
 float[] GX = new float[DATA_NUM];
 float[] GY = new float[DATA_NUM];
 float[] GZ = new float[DATA_NUM];
+float[] XAngle = new float[DATA_NUM];
+float[] YAngle = new float[DATA_NUM];
+float[] ZAngle = new float[DATA_NUM];
 
-int i = 0;
+int i = 1;
 
 int[] sensors = new int[SENSOR_NUM];
 int counter;
@@ -32,6 +43,8 @@ void setup()
   //window size
   size(800, 400);
   frameRate(100);
+
+  initArray();
 
   //port setting
   myPort=new Serial(this, "/dev/cu.usbserial-AHXDY29Y", 115200);
@@ -70,15 +83,43 @@ void initGraph()
   graph_color[5] = color(127);
 }
 
+void initArray()
+{
+  D1[0] = 0;
+  D2[0] = 0;
+  D3[0] = 0;
+  D4[0] = 0;
+  D5[0] = 0;
+  D6[0] = 0;
+  BV[0] = 0;
+  BI[0] = 0;
+  AX[0] = 0;
+  AY[0] = 0;
+  AZ[0] = 0;
+  VX[0] = 0;
+  VY[0] = 0;
+  VZ[0] = 0;
+  PX[0] = 0;
+  PY[0] = 0;
+  PZ[0] = 0;
+  GX[0] = 0;
+  GY[0] = 0;
+  GZ[0] = 0;
+  XAngle[0] = 0;
+  YAngle[0] = 0;
+  ZAngle[0] = 0;
+}
+
 void serialEvent(Serial myPort)
 {
   String myString = myPort.readStringUntil('\n');
 
-  if (myString == null) {return;}
+  if (myString == null) {
+    return;
+  }
 
   storeSensorData(myString);
-
-  //println(myString);
+//    println(myString);
 }
 
 void storeSensorData(String str)
@@ -90,19 +131,16 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D1[i] = int(sensor_data[1]);
-    print("D1="+ D1[i]);
     sensors[0] = D1[i];
-    
-    i++;
-    if (i <= DATA_NUM){i=0;}
+    //    print("D1="+ D1[i]);
   }
-  
+
   // D2
   sensor_data = match(str, "D2:([0-9]{1,10})");
   if (sensor_data != null)
   {
     D2[i] = int(sensor_data[1]);
-    print("_D2="+ D2[i]);
+    //    print("_D2="+ D2[i]);
   }
 
   // D3
@@ -110,7 +148,7 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D3[i] = int(sensor_data[1]);
-    print("_D3="+ D3[i]);
+    //    print("_D3="+ D3[i]);
   }
 
   // D4
@@ -118,7 +156,7 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D4[i] = int(sensor_data[1]);
-    print("_D4="+ D4[i]);
+    //    print("_D4="+ D4[i]);
   }
 
   // D5
@@ -126,7 +164,7 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D5[i] = int(sensor_data[1]);
-    print("_D5="+ D5[i]);
+    //    print("_D5="+ D5[i]);
   }
 
   // D6
@@ -134,7 +172,7 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D6[i] = int(sensor_data[1]);
-    print("_D6="+ D6[i]);
+    //    print("_D6="+ D6[i]);
   }
 
   // BV
@@ -142,15 +180,15 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     BV[i] = int(sensor_data[1]);
-    print("_BV="+ BV[i]);
+    //    print("_BV="+ BV[i]);
   }
-  
+
   // BI
   sensor_data = match(str, "BI:([0-9]{1,10})");
   if (sensor_data != null)
   {
     BI[i] = int(sensor_data[1]);
-    print("_BI="+ BI[i]);
+    //    print("_BI="+ BI[i]);
   }
 
   // AX
@@ -158,13 +196,22 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int AX_row = 0;
-    
+
     AX_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     AX_row = AX_row << 16;
     AX_row = AX_row >> 16;
-    AX[i] = AX_row * ACC_SENSOR_DATA_TO_G;
+
+
+    AX[i] = AX_row * ACC_SENSOR_DATA_TO_G - AX_ZERO;
+    VX[i] = VX[i-1] + (AX[i] * TIME_CYCLE);
+    PX[i] = PX[i-1] + (VX[i] * TIME_CYCLE);
+    if (i == 1) {
+      AX_ZERO = AX[i];
+    }
     print("_AX="+ AX[i] + "g");
+//    print("_VX="+ VX[i] + "m/s");
+//    println("_PX="+ PX[i] + "m");
   }
 
   // AY
@@ -172,13 +219,13 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int AY_row = 0;
-    
+
     AY_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     AY_row = AY_row << 16;
     AY_row = AY_row >> 16;
     AY[i] = AY_row * ACC_SENSOR_DATA_TO_G;
-    print("_AY="+ AY[i] + "g");
+    //    print("_AY="+ AY[i] + "g");
   }
 
   // AZ
@@ -186,13 +233,13 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int AZ_row = 0;
-    
+
     AZ_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     AZ_row = AZ_row << 16;
     AZ_row = AZ_row >> 16;
     AZ[i] = AZ_row * ACC_SENSOR_DATA_TO_G;
-    print("_AZ="+ AZ[i] + "g");
+    //    print("_AZ="+ AZ[i] + "g");
   }
 
   // GX
@@ -200,13 +247,13 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int GX_row = 0;
-    
+
     GX_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     GX_row = GX_row << 16;
     GX_row = GX_row >> 16;
     GX[i] = GX_row * GYRO_SENSOR_DATA_TO_DEG;
-    print("_GX="+ GX[i] + "deg");
+    //    print("_GX="+ GX[i] + "deg");
   }
 
   // GY
@@ -214,13 +261,13 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int GY_row = 0;
-    
+
     GY_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     GY_row = GY_row << 16;
     GY_row = GY_row >> 16;
     GY[i] = GY_row * GYRO_SENSOR_DATA_TO_DEG;
-    print("_GY="+ GY[i] + "deg");
+    //    print("_GY="+ GY[i] + "deg");
   }
 
   // GZ
@@ -228,13 +275,16 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     int GZ_row = 0;
-    
+
     GZ_row = unhex(sensor_data[1]);
     // sensor data is 16bit but "int" is 32bit
     GZ_row = GZ_row << 16;
     GZ_row = GZ_row >> 16;
     GZ[i] = GZ_row * GYRO_SENSOR_DATA_TO_DEG;
-    println("_GZ="+ GZ[i] + "deg");
+    //    println("_GZ="+ GZ[i] + "deg");
+    i++;
+    if (i >= DATA_NUM) {
+      i=1;
+    }
   }
-
 }
