@@ -7,6 +7,7 @@ final float GYRO_SENSOR_DATA_TO_DEG = 0.07;
 final int DATA_NUM = 12000;
 final float TIME_CYCLE= 0.1;
 float AX_ZERO = 0;
+float GX_ZERO = 0;
 
 int[] D1 = new int[DATA_NUM];
 int[] D2 = new int[DATA_NUM];
@@ -56,7 +57,7 @@ void draw()
   {
     fill(graph_color[i]);
     float tx = map(counter, 0, width, 0, width);
-    float ty = map(sensors[i], -0.5, 0.5, height, 0);
+    float ty = map(sensors[i], -50, 50, height, 0);
     ellipse(tx, ty, 4, 4);
   }
   if (counter > width)
@@ -179,10 +180,9 @@ void storeSensorData(String str)
     }
     VX[i] = VX[i-1] + 2 * TIME_CYCLE / 45 * (7 * AX[i-5] + 32 * AX[i-4] + 12 * AX[i-3] + 32 * AX[i-2] + 7 * AX[i-1]);
 //    PX[i] = PX[i-1] + 2 * TIME_CYCLE / 45 * (7 * VX[i-5] + 32 * VX[i-4] + 12 * VX[i-3] + 32 * VX[i-2] + 7 * VX[i-1]);
-    sensors[0] = VX[i];
 
-    print("_AX="+ AX[i] + "g");
-    println("_VX="+ VX[i] + "m/s");
+//    print("_AX="+ AX[i] + "g");
+//    println("_VX="+ VX[i] + "m/s");
 //    println("_PX="+ PX[i] + "m");
   }
 
@@ -224,8 +224,13 @@ void storeSensorData(String str)
     // sensor data is 16bit but "int" is 32bit
     GX_row = GX_row << 16;
     GX_row = GX_row >> 16;
-    GX[i] = GX_row * GYRO_SENSOR_DATA_TO_DEG;
-    //    print("_GX="+ GX[i] + "deg");
+    GX[i] = GX_row * GYRO_SENSOR_DATA_TO_DEG - GX_ZERO;
+        if (i == 5) {
+      GX_ZERO = GX[i];
+    }
+    XAngle[i] = XAngle[i-1] + 2 * TIME_CYCLE / 45 * (7 * GX[i-5] + 32 * GX[i-4] + 12 * GX[i-3] + 32 * GX[i-2] + 7 * GX[i-1]);
+    sensors[0] = XAngle[i];
+    println("_GX="+ GX[i] + "deg" + GX_ZERO);
   }
 
   // GY
