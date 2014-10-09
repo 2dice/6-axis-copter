@@ -32,9 +32,9 @@ float[] XAngle = new float[DATA_NUM];
 float[] YAngle = new float[DATA_NUM];
 float[] ZAngle = new float[DATA_NUM];
 
-int i = 1;
+int i = 5;
 
-int[] sensors = new int[SENSOR_NUM];
+float[] sensors = new float[SENSOR_NUM];
 int counter;
 color[] graph_color = new color[6];
 
@@ -43,8 +43,6 @@ void setup()
   //window size
   size(800, 400);
   frameRate(100);
-
-  initArray();
 
   //port setting
   myPort=new Serial(this, "/dev/cu.usbserial-AHXDY29Y", 115200);
@@ -58,7 +56,7 @@ void draw()
   {
     fill(graph_color[i]);
     float tx = map(counter, 0, width, 0, width);
-    float ty = map(sensors[i], 0, 1023, height, 0);
+    float ty = map(sensors[i], -0.5, 0.5, height, 0);
     ellipse(tx, ty, 4, 4);
   }
   if (counter > width)
@@ -83,33 +81,6 @@ void initGraph()
   graph_color[5] = color(127);
 }
 
-void initArray()
-{
-  D1[0] = 0;
-  D2[0] = 0;
-  D3[0] = 0;
-  D4[0] = 0;
-  D5[0] = 0;
-  D6[0] = 0;
-  BV[0] = 0;
-  BI[0] = 0;
-  AX[0] = 0;
-  AY[0] = 0;
-  AZ[0] = 0;
-  VX[0] = 0;
-  VY[0] = 0;
-  VZ[0] = 0;
-  PX[0] = 0;
-  PY[0] = 0;
-  PZ[0] = 0;
-  GX[0] = 0;
-  GY[0] = 0;
-  GZ[0] = 0;
-  XAngle[0] = 0;
-  YAngle[0] = 0;
-  ZAngle[0] = 0;
-}
-
 void serialEvent(Serial myPort)
 {
   String myString = myPort.readStringUntil('\n');
@@ -131,7 +102,7 @@ void storeSensorData(String str)
   if (sensor_data != null)
   {
     D1[i] = int(sensor_data[1]);
-    sensors[0] = D1[i];
+//    sensors[0] = D1[i];
     //    print("D1="+ D1[i]);
   }
 
@@ -202,15 +173,16 @@ void storeSensorData(String str)
     AX_row = AX_row << 16;
     AX_row = AX_row >> 16;
 
-
     AX[i] = AX_row * ACC_SENSOR_DATA_TO_G - AX_ZERO;
-    VX[i] = VX[i-1] + (AX[i] * TIME_CYCLE);
-    PX[i] = PX[i-1] + (VX[i] * TIME_CYCLE);
-    if (i == 1) {
+    if (i == 5) {
       AX_ZERO = AX[i];
     }
+    VX[i] = VX[i-1] + 2 * TIME_CYCLE / 45 * (7 * AX[i-5] + 32 * AX[i-4] + 12 * AX[i-3] + 32 * AX[i-2] + 7 * AX[i-1]);
+//    PX[i] = PX[i-1] + 2 * TIME_CYCLE / 45 * (7 * VX[i-5] + 32 * VX[i-4] + 12 * VX[i-3] + 32 * VX[i-2] + 7 * VX[i-1]);
+    sensors[0] = VX[i];
+
     print("_AX="+ AX[i] + "g");
-//    print("_VX="+ VX[i] + "m/s");
+    println("_VX="+ VX[i] + "m/s");
 //    println("_PX="+ PX[i] + "m");
   }
 
