@@ -5568,18 +5568,20 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </library>
 <library name="symbol">
 <packages>
-<package name="DYMMY-LIPO">
+<package name="LIPO2CEL">
 <wire x1="0.635" y1="6.35" x2="0.635" y2="3.81" width="0.254" layer="21"/>
 <wire x1="-2.54" y1="3.81" x2="-0.635" y2="3.81" width="0.1524" layer="21"/>
 <wire x1="0.635" y1="3.81" x2="2.54" y2="3.81" width="0.1524" layer="21"/>
 <wire x1="0.635" y1="3.81" x2="0.635" y2="1.27" width="0.254" layer="21"/>
 <wire x1="1.143" y1="5.334" x2="2.159" y2="5.334" width="0.1524" layer="21"/>
 <wire x1="1.651" y1="5.842" x2="1.651" y2="4.826" width="0.1524" layer="21"/>
-<pad name="+" x="1.27" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
-<pad name="-" x="-1.27" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
-<text x="-2.54" y="-3.429" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-2.54" y="-5.08" size="1.27" layer="26" ratio="10">&gt;VALUE</text>
+<pad name="+-" x="0" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
+<pad name="-" x="-2.54" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
 <rectangle x1="-0.635" y1="2.54" x2="0" y2="5.08" layer="21"/>
+<pad name="+" x="2.54" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
+<wire x1="-2.54" y1="-1.27" x2="-2.54" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="0" y1="-1.27" x2="0" y2="-3.81" width="0.127" layer="21"/>
+<wire x1="2.54" y1="-1.27" x2="2.54" y2="-3.81" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -5605,22 +5607,28 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="-2.54" y1="0" x2="-2.54" y2="0.762" width="0.254" layer="94"/>
 <wire x1="2.54" y1="0" x2="2.54" y2="-0.762" width="0.254" layer="94"/>
 </symbol>
+<symbol name="3.6V">
+<text x="-2.54" y="2.54" size="1.778" layer="96">3.6V</text>
+<pin name="3.6V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
+<wire x1="-2.54" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+</symbol>
 <symbol name="LIPO-BATT">
 <wire x1="-0.635" y1="0.635" x2="-0.635" y2="0" width="0.4064" layer="94"/>
 <wire x1="-2.54" y1="0" x2="-0.635" y2="0" width="0.1524" layer="94"/>
 <wire x1="-0.635" y1="0" x2="-0.635" y2="-0.635" width="0.4064" layer="94"/>
 <wire x1="0.635" y1="2.54" x2="0.635" y2="0" width="0.4064" layer="94"/>
-<wire x1="0.635" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
 <wire x1="0.635" y1="0" x2="0.635" y2="-2.54" width="0.4064" layer="94"/>
-<text x="-1.27" y="3.175" size="1.778" layer="95">&gt;NAME</text>
-<text x="-1.27" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="+" x="5.08" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+<text x="1.27" y="5.715" size="1.778" layer="95">&gt;NAME</text>
+<text x="6.35" y="-5.08" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="-" x="-5.08" y="0" visible="pad" length="short" direction="pas"/>
-</symbol>
-<symbol name="3.6V">
-<text x="-2.54" y="2.54" size="1.778" layer="96">3.6V</text>
-<pin name="3.6V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-<wire x1="-2.54" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="9.525" y1="0.635" x2="9.525" y2="0" width="0.4064" layer="94"/>
+<wire x1="9.525" y1="0" x2="9.525" y2="-0.635" width="0.4064" layer="94"/>
+<wire x1="10.795" y1="2.54" x2="10.795" y2="0" width="0.4064" layer="94"/>
+<wire x1="10.795" y1="0" x2="12.7" y2="0" width="0.1524" layer="94"/>
+<wire x1="10.795" y1="0" x2="10.795" y2="-2.54" width="0.4064" layer="94"/>
+<pin name="+" x="15.24" y="0" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="+-" x="5.08" y="-5.08" length="middle" direction="pas" rot="R90"/>
+<wire x1="0.635" y1="0" x2="9.525" y2="0" width="0.1524" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -5661,22 +5669,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </device>
 </devices>
 </deviceset>
-<deviceset name="LIPO-BATT" prefix="B" uservalue="yes">
-<gates>
-<gate name="G$1" symbol="LIPO-BATT" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="DYMMY-LIPO">
-<connects>
-<connect gate="G$1" pin="+" pad="+"/>
-<connect gate="G$1" pin="-" pad="-"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="3.6V" prefix="P+" uservalue="yes">
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
@@ -5684,6 +5676,23 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </gates>
 <devices>
 <device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="LIPO-BATT" prefix="B" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="LIPO-BATT" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="LIPO2CEL">
+<connects>
+<connect gate="G$1" pin="+" pad="+"/>
+<connect gate="G$1" pin="+-" pad="+-"/>
+<connect gate="G$1" pin="-" pad="-"/>
+</connects>
 <technologies>
 <technology name=""/>
 </technologies>
@@ -6484,8 +6493,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="P+17" library="symbol" deviceset="4.5V" device=""/>
 <part name="P+18" library="symbol" deviceset="4.5V" device=""/>
 <part name="P+19" library="symbol" deviceset="4.5V" device=""/>
-<part name="B1" library="symbol" deviceset="LIPO-BATT" device=""/>
-<part name="B2" library="symbol" deviceset="LIPO-BATT" device=""/>
 <part name="SUPPLY14" library="symbol" deviceset="GND" device=""/>
 <part name="P+20" library="symbol" deviceset="BAT" device=""/>
 <part name="IC14" library="IC" deviceset="NJM111000F1" device=""/>
@@ -6614,6 +6621,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R22" library="passive" deviceset="R-US_" device="" value="1.5kJ"/>
 <part name="P+32" library="symbol" deviceset="4.5V" device=""/>
 <part name="R23" library="passive" deviceset="R-US_" device="" value="4.7kJ"/>
+<part name="B1" library="symbol" deviceset="LIPO-BATT" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6691,9 +6699,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="P+17" gate="G$1" x="60.96" y="205.74"/>
 <instance part="P+18" gate="G$1" x="60.96" y="180.34"/>
 <instance part="P+19" gate="G$1" x="60.96" y="154.94"/>
-<instance part="B1" gate="G$1" x="40.64" y="73.66" rot="R90"/>
-<instance part="B2" gate="G$1" x="40.64" y="88.9" rot="R90"/>
-<instance part="SUPPLY14" gate="PE" x="40.64" y="63.5"/>
+<instance part="SUPPLY14" gate="PE" x="40.64" y="68.58"/>
 <instance part="P+20" gate="G$1" x="144.78" y="101.6"/>
 <instance part="IC14" gate="G$1" x="210.82" y="81.28"/>
 <instance part="P+21" gate="G$1" x="182.88" y="91.44"/>
@@ -6827,6 +6833,7 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </instance>
 <instance part="P+32" gate="G$1" x="383.54" y="261.62"/>
 <instance part="R23" gate="G$1" x="383.54" y="251.46" rot="R90"/>
+<instance part="B1" gate="G$1" x="40.64" y="78.74" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -7385,9 +7392,9 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="53.34" y1="266.7" x2="53.34" y2="264.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="B1" gate="G$1" pin="-"/>
 <pinref part="SUPPLY14" gate="PE" pin="GND"/>
-<wire x1="40.64" y1="68.58" x2="40.64" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="73.66" x2="40.64" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="B1" gate="G$1" pin="-"/>
 </segment>
 <segment>
 <pinref part="SUPPLY15" gate="PE" pin="GND"/>
@@ -8029,13 +8036,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="383.54" y1="256.54" x2="383.54" y2="259.08" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$13" class="0">
-<segment>
-<pinref part="B2" gate="G$1" pin="-"/>
-<pinref part="B1" gate="G$1" pin="+"/>
-<wire x1="40.64" y1="83.82" x2="40.64" y2="78.74" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$14" class="0">
 <segment>
 <pinref part="C1" gate="G$1" pin="1"/>
@@ -8325,8 +8325,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <segment>
 <pinref part="F1" gate="G$1" pin="1"/>
 <wire x1="50.8" y1="96.52" x2="40.64" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="B2" gate="G$1" pin="+"/>
 <wire x1="40.64" y1="96.52" x2="40.64" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="B1" gate="G$1" pin="+"/>
 </segment>
 </net>
 <net name="BAT-V" class="0">
