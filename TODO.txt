@@ -16,6 +16,7 @@ TODO:
 	http://www.kkhobby.com/SHOP/BT167.html
 	コネクタ[s3B-XH-A]
 	http://www.marutsu.co.jp/shohin_59181/
+	SW[SS12D01G4]
 	リセッタブルヒューズ[MF-SM300-2]
 	逆接Di[SR54F]
 	電流センサ[LT6106CS5]
