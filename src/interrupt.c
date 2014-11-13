@@ -16,52 +16,62 @@ CMIA3 (void)
   {
     put_string ("D1:");
     put_dec ((uint16) get_distance_1 ());
+    put_string ("\n");
 
-    put_string (" D2:");
+    put_string ("D2:");
     put_dec ((uint16) get_distance_2 ());
+    put_string ("\n");
 
-    put_string (" D3:");
+    put_string ("D3:");
     put_dec ((uint16) get_distance_3 ());
+    put_string ("\n");
 
-    put_string (" D4:");
+    put_string ("D4:");
     put_dec ((uint16) get_distance_4 ());
+    put_string ("\n");
 
-    put_string (" D5:");
+    put_string ("D5:");
     put_dec ((uint16) get_distance_5 ());
+    put_string ("\n");
 
-    put_string (" D6:");
+    put_string ("D6:");
     put_dec ((uint16) get_distance_6 ());
     put_string ("\n");
 
-    put_string (" BV:");
+    put_string ("BV:");
     put_dec ((uint16) get_bat_V ());
+    put_string ("\n");
 
-    put_string (" BI:");
+    put_string ("BI:");
     put_dec ((uint16) get_bat_I ());
     put_string ("\n");
 
-    put_string ("  AX:");
+    put_string ("AX:");
     /* put_dec (get_acceleration_x ()); */
     put_hex ((uint32)get_acceleration_x (), 4);
+    put_string ("\n");
 
-    put_string (" AY:");
+    put_string ("AY:");
     /* put_dec (get_acceleration_y ()); */
     put_hex ((uint32)get_acceleration_y (), 4);
+    put_string ("\n");
 
-    put_string (" AZ:");
+    put_string ("AZ:");
     /* put_dec (get_acceleration_z ()); */
     put_hex ((uint32)get_acceleration_z (), 4);
     put_string ("\n");
 
-    put_string ("   GX:");
+    put_string ("GX:");
     /* put_dec (get_gyroscope_x ()); */
     put_hex ((uint32)get_gyroscope_x (), 4);
+    put_string ("\n");
 
-    put_string (" GY:");
+    put_string ("GY:");
     /* put_dec (get_gyroscope_y ()); */
     put_hex ((uint32)get_gyroscope_y (), 4);
+    put_string ("\n");
 
-    put_string (" GZ:");
+    put_string ("GZ:");
     /* put_dec (get_gyroscope_z ()); */
     put_hex ((uint32)get_gyroscope_z (), 4);
     put_string ("\n");
