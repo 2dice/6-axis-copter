@@ -9,6 +9,10 @@ class serial_if : public QObject
     Q_DISABLE_COPY(serial_if)
 
 public:
+    explicit serial_if(QObject *parent = 0);
+    ~serial_if();
+
+private:
     struct Settings {
         QString name;
         qint32 baudRate;
@@ -23,15 +27,11 @@ public:
         QString stringFlowControl;
         //bool localEchoEnabled;
     };
-    explicit serial_if(QObject *parent = 0);
-    ~serial_if();
-    Settings settings() const;
-
-private:
-    QSerialPort *serial;
     Settings currentSettings;
+    QSerialPort *serial;
 
 private:
+    Settings settings() const;
     void updateSettings();
 
 signals:
