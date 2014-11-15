@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include "serial_if.h"
+#include "data.h"
 
 #include <QWidget>
 
@@ -17,11 +18,14 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
+public:
+    serial_if *serial_if;
+
 private slots:
 
 private:
     Ui::Widget *ui;
-    serial_if *serial_if;
+    Data *data;
 
 private:
 

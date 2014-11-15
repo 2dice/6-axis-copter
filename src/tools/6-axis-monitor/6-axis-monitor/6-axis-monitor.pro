@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         widget.cpp \
-    serial_if.cpp
+    serial_if.cpp \
+    data.cpp
 
 HEADERS  += widget.h \
-    serial_if.h
+    serial_if.h \
+    data.h
 
 FORMS    += widget.ui

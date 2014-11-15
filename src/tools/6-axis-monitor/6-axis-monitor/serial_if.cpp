@@ -14,7 +14,7 @@ serial_if::serial_if(QObject *parent) :
           SLOT(handleError(QSerialPort::SerialPortError)));
   connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
   //connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
-  qDebug() << "init";
+  qDebug() << "init serial";
 }
 
 serial_if::~serial_if()
@@ -55,18 +55,9 @@ void serial_if::readData()
     QByteArray data = serial->readLine();
     data = data.trimmed();
     if (data.isEmpty())
-      qDebug() << "emp";
-    if (data.contains("D1:"))
-    {
-        data.remove(0,3);
-        bool ok;
-        int d1;
-        d1 = data.toInt(&ok, 10);
-        qDebug() << "D1=";
-        qDebug("%s", qPrintable(data));
-    }
+      qDebug() << "data empty";
     else
-      qDebug("%s", qPrintable(data));
+      emit storeData(data);
 }
 
 void serial_if::handleError(QSerialPort::SerialPortError error)
@@ -74,7 +65,7 @@ void serial_if::handleError(QSerialPort::SerialPortError error)
     if (error == QSerialPort::ResourceError) {
         // QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
         closeSerialPort();
-        qDebug() << "serial close";
+        qDebug() << "serial close(err)";
     }
 }
 

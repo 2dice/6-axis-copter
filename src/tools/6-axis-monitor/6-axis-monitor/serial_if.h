@@ -35,6 +35,7 @@ private:
     void updateSettings();
 
 signals:
+  void storeData(QByteArray &data);
 
 public slots:
 
