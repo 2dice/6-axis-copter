@@ -52,8 +52,7 @@ void serial_if::writeData(const QByteArray &data)
 
 void serial_if::readData()
 {
-    QByteArray data = serial->readLine();
-    data = data.trimmed();
+    QByteArray data = serial->readAll();
     if (data.isEmpty())
       qDebug() << "data empty";
     else
@@ -63,9 +62,8 @@ void serial_if::readData()
 void serial_if::handleError(QSerialPort::SerialPortError error)
 {
     if (error == QSerialPort::ResourceError) {
-        // QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
         closeSerialPort();
-        qDebug() << "serial close(err)";
+        qDebug() << "serial close(err)" << serial->errorString();
     }
 }
 

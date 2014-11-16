@@ -31,8 +31,10 @@ private:
       int16_t GZ[1000];
   };
   SensorData sensorData;
+  QByteArray format_data;
 
 private:
+  void formatData(QByteArray &data);
   void distributeData(QByteArray &data);
 
 signals:

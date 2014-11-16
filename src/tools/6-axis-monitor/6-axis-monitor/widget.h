@@ -19,12 +19,12 @@ public:
     ~Widget();
 
 public:
-    serial_if *serial_if;
 
 private slots:
 
 private:
     Ui::Widget *ui;
+    serial_if *serial_if;
     Data *data;
 
 private:

@@ -15,8 +15,28 @@ Data::~Data()
 
 void Data::recvData(QByteArray &data)
 {
-  distributeData(data);
+  formatData(data);
 }
+
+void Data::formatData(QByteArray &data)
+{
+  int currentReturnElement = 19;
+  int lastReturnElement = 0;
+  while (data.count("\r"))
+  {
+    currentReturnElement = data.indexOf("\r");
+    format_data.append(data.mid(lastReturnElement, currentReturnElement - lastReturnElement));
+    //format_data = data.mid(lastReturnElement, currentReturnElement - lastReturnElement);
+    format_data = format_data.trimmed();
+    distributeData(format_data);
+    format_data.clear();
+    data.replace(currentReturnElement, 1, "\n");
+    lastReturnElement = currentReturnElement;
+  }
+  format_data = data.mid(lastReturnElement, 19 - lastReturnElement);
+  format_data = format_data.trimmed();
+}
+
 void Data::distributeData(QByteArray &data)
 {
   bool ok;
