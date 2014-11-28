@@ -5,7 +5,7 @@
 Data::Data(QObject *parent) :
     QObject(parent)
 {
-    qDebug() << "init Data";
+    qDebug() << "create Data";
 }
 
 Data::~Data()
@@ -26,7 +26,6 @@ void Data::formatData(QByteArray &data)
   {
     currentReturnElement = data.indexOf("\r");
     format_data.append(data.mid(lastReturnElement, currentReturnElement - lastReturnElement));
-    //format_data = data.mid(lastReturnElement, currentReturnElement - lastReturnElement);
     format_data = format_data.trimmed();
     distributeData(format_data);
     format_data.clear();
@@ -45,7 +44,7 @@ void Data::distributeData(QByteArray &data)
   {
     data.remove(0,3);
     sensorData.D1[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D1 =" << sensorData.D1[sensorData.currentElement];
+    //qDebug() << "D1 =" << sensorData.D1[sensorData.currentElement];
     if (sensorData.currentElement <= 998)
       sensorData.currentElement++;
     else
@@ -55,55 +54,55 @@ void Data::distributeData(QByteArray &data)
   {
     data.remove(0,3);
     sensorData.D2[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D2 =" << sensorData.D2[sensorData.currentElement];
+    //qDebug() << "D2 =" << sensorData.D2[sensorData.currentElement];
   }
   else if (data.contains("D3:"))
   {
     data.remove(0,3);
     sensorData.D3[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D3 =" << sensorData.D3[sensorData.currentElement];
+    //qDebug() << "D3 =" << sensorData.D3[sensorData.currentElement];
   }
   else if (data.contains("D4:"))
   {
     data.remove(0,3);
     sensorData.D4[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D4 =" << sensorData.D4[sensorData.currentElement];
+    //qDebug() << "D4 =" << sensorData.D4[sensorData.currentElement];
   }
   else if (data.contains("D5:"))
   {
     data.remove(0,3);
     sensorData.D5[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D5 =" << sensorData.D5[sensorData.currentElement];
+    //qDebug() << "D5 =" << sensorData.D5[sensorData.currentElement];
   }
   else if (data.contains("D6:"))
   {
     data.remove(0,3);
     sensorData.D6[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "D6 =" << sensorData.D6[sensorData.currentElement];
+    //qDebug() << "D6 =" << sensorData.D6[sensorData.currentElement];
   }
   else if (data.contains("BV:"))
   {
     data.remove(0,3);
     sensorData.BV[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "BV =" << sensorData.BV[sensorData.currentElement];
+    //qDebug() << "BV =" << sensorData.BV[sensorData.currentElement];
   }
   else if (data.contains("BI:"))
   {
     data.remove(0,3);
     sensorData.BI[sensorData.currentElement] = data.toInt(&ok, 10);
-    qDebug() << "BI =" << sensorData.BI[sensorData.currentElement];
+    //qDebug() << "BI =" << sensorData.BI[sensorData.currentElement];
   }
   else if (data.contains("AX:"))
   {
     data.remove(0,3);
     sensorData.AX[sensorData.currentElement] = data.toInt(&ok, 16);
-    qDebug() << "AX =" << sensorData.AX[sensorData.currentElement];
+    //qDebug() << "AX =" << sensorData.AX[sensorData.currentElement];
   }
   else if (data.contains("AY:"))
   {
     data.remove(0,3);
     sensorData.AY[sensorData.currentElement] = data.toInt(&ok, 16);
-    qDebug() << "AY =" << sensorData.AY[sensorData.currentElement];
+    //qDebug() << "AY =" << sensorData.AY[sensorData.currentElement];
   }
   else if (data.contains("AZ:"))
   {
@@ -115,20 +114,25 @@ void Data::distributeData(QByteArray &data)
   {
     data.remove(0,3);
     sensorData.GX[sensorData.currentElement] = data.toInt(&ok, 16);
-    qDebug() << "GX =" << sensorData.GX[sensorData.currentElement];
+    //qDebug() << "GX =" << sensorData.GX[sensorData.currentElement];
   }
   else if (data.contains("GY:"))
   {
     data.remove(0,3);
     sensorData.GY[sensorData.currentElement] = data.toInt(&ok, 16);
-    qDebug() << "GY =" << sensorData.GY[sensorData.currentElement];
+    //qDebug() << "GY =" << sensorData.GY[sensorData.currentElement];
   }
   else if (data.contains("GZ:"))
   {
     data.remove(0,3);
     sensorData.GZ[sensorData.currentElement] = data.toInt(&ok, 16);
-    qDebug() << "GZ =" << sensorData.GZ[sensorData.currentElement];
+    //qDebug() << "GZ =" << sensorData.GZ[sensorData.currentElement];
   }
   else
     qDebug("other data > %s", qPrintable(data));
+}
+
+qreal Data::AZ()
+{
+  return (qreal)sensorData.AZ[sensorData.currentElement - 1];
 }

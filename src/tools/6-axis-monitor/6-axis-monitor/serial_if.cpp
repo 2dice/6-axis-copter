@@ -14,13 +14,13 @@ serial_if::serial_if(QObject *parent) :
           SLOT(handleError(QSerialPort::SerialPortError)));
   connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
   //connect(console, SIGNAL(getData(QByteArray)), this, SLOT(writeData(QByteArray)));
-  qDebug() << "init serial";
+  qDebug() << "create serial_if";
 }
 
 serial_if::~serial_if()
 {
     this->closeSerialPort();
-    qDebug() << "close";
+    qDebug() << "serial close";
 }
 
 serial_if::Settings serial_if::settings() const

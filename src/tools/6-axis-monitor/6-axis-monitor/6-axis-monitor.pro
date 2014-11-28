@@ -4,21 +4,29 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui quick serialport
 
 TARGET = 6-axis-monitor
 TEMPLATE = app
 
-
-SOURCES += main.cpp\
-        widget.cpp \
+SOURCES += main.cpp \
     serial_if.cpp \
-    data.cpp
+    data.cpp \
+    graph.cpp \
+    gridnode.cpp \
+    linenode.cpp \
+    ctrl.cpp
 
-HEADERS  += widget.h \
+HEADERS += \
     serial_if.h \
-    data.h
+    data.h \
+    graph.h \
+    gridnode.h \
+    linenode.h \
+    ctrl.h
 
-FORMS    += widget.ui
+RESOURCES += view.qrc
+
+OTHER_FILES += \
+    main.qml
+

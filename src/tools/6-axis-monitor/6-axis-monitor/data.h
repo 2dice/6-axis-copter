@@ -11,6 +11,7 @@ class Data : public QObject
 public:
     explicit Data(QObject *parent = 0);
     ~Data();
+    qreal AZ(void);
 
 private:
   struct SensorData {
