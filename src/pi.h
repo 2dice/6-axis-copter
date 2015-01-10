@@ -28,8 +28,8 @@ internal_timer_init (void);
 void
 clear_TMR8ch3A_compare_match_flag (void);
 
-void
-motor_driver_init (void);
+// void
+// motor_driver_init (void);
 
 void
 ADC_init (void);
@@ -64,5 +64,7 @@ int16
 get_gyroscope_y (void);
 int16
 get_gyroscope_z (void);
+int8
+get_driver_status (void);
 
 #endif

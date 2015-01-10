@@ -19,7 +19,7 @@ init (void)
   serial_init ();
   DRAM_init ();
   internal_timer_init ();
-  motor_driver_init ();
+  /* motor_driver_init (); */
   ADC_init ();
   I2C_init ();
 

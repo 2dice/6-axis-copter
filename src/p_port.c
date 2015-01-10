@@ -3,7 +3,9 @@
 #include "pi.h"
 
 #define PBDR  (*(volatile uint8*)0xffffda)
+#define PADR  (*(volatile uint8*)0xffffd9)
 #define PBDDR (*(volatile uint8*)0xfee00a)
+#define PADDR (*(volatile uint8*)0xfee009)
 #define P8DDR (*(volatile uint8*)0xfee007)
 #define P2DDR (*(volatile uint8*)0xfee001)
 #define P1DDR (*(volatile uint8*)0xfee000)
@@ -35,10 +37,27 @@ set_PORT83_CS_output (void)
   P8DDR = P8DDR | 0x08;
 }
 
-////////////////////PORT B////////////////////
+////////////////////PORT A////////////////////
 void
-motor_driver_enable (void)
+motor_driver_direction_enable (void)
 {
-  PBDDR = PBDDR | 0x08;
-  PBDR = PBDR | 0x08;
+  PADDR = 0xFF;
 }
+
+void
+motor_driver1_direction (bool dir)
+{
+  /* 1で正転，0で逆転 */
+  if (dir==1)
+    PADR = PADR | 0x04;
+  else if (dir==0)
+    PADR = PADR & 0xFB;
+}
+
+////////////////////PORT B////////////////////
+/* void */
+/* motor_driver_enable (void) */
+/* { */
+/*   PBDDR = PBDDR | 0x08; */
+/*   PBDR = PBDR | 0x08; */
+/* } */

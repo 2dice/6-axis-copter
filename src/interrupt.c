@@ -8,12 +8,22 @@ void
 CMIA3 (void)
 {
   static int16 timer_count = 0;
+  static uint16 cnt = 0;
 
   clear_TMR8ch3A_compare_match_flag ();
   timer_count++;
 
-  if (timer_count >= 10)
+  if (timer_count >= 8)
   {
+  cnt++;
+    /* put_string ("cnt:"); */
+    /* put_dec (cnt); */
+    /* put_string ("\n"); */
+
+    put_string ("DrvStatus:");
+    put_hex ((uint32)get_driver_status (), 2);
+    put_string ("\n");
+
     put_string ("D1:");
     put_dec ((uint16) get_distance_1 ());
     put_string ("\n");

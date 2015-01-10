@@ -43,4 +43,10 @@ read_gyroscope_y (void);
 int16
 read_gyroscope_z (void);
 
+void
+set_motor_driver_parameter (void);
+
+int8
+read_driver_status (void);
+
 #endif
