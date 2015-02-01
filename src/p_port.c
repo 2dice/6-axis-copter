@@ -41,17 +41,18 @@ set_PORT83_CS_output (void)
 void
 motor_driver_direction_enable (void)
 {
-  PADDR = 0xFF;
+  PADDR = 0xAA;
+  PBDDR = 0x28;
 }
 
 void
-motor_driver1_direction (bool dir)
+motor_driver2_direction (bool dir)
 {
   /* 1で正転，0で逆転 */
   if (dir==1)
-    PADR = PADR | 0x04;
+    PADR = PADR | 0x08;
   else if (dir==0)
-    PADR = PADR & 0xFB;
+    PADR = PADR & 0xF7;
 }
 
 ////////////////////PORT B////////////////////

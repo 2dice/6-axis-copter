@@ -237,8 +237,9 @@ disable_TMR16ch0A_interrupt (void)
 void
 set_TMR16ch0_clock_source (void)
 {
-  /* 内部クロック/1 */
-  TMR16_16TCR0 = TMR16_16TCR0 & ~0x07;
+  /* 内部クロック/4 */
+  TMR16_16TCR0 = TMR16_16TCR0 | 0x02;
+  TMR16_16TCR0 = TMR16_16TCR0 & ~0x05;
 }
 
 void
@@ -254,7 +255,7 @@ set_TMR16ch0_compare_match_register (uint8 duty)
 {
   if (duty < 100)
   {
-    /* A:4us */
+    /* A:16us */
     TMR16_GRA0H = 0;
     TMR16_GRA0L = 100;
     /* duty設定，50で50% */
@@ -291,8 +292,9 @@ disable_TMR16ch1A_interrupt (void)
 void
 set_TMR16ch1_clock_source (void)
 {
-  /* 内部クロック/1 */
-  TMR16_16TCR1 = TMR16_16TCR1 & ~0x07;
+  /* 内部クロック/4 */
+  TMR16_16TCR1 = TMR16_16TCR1 | 0x02;
+  TMR16_16TCR1 = TMR16_16TCR1 & ~0x05;
 }
 
 void
@@ -308,7 +310,7 @@ set_TMR16ch1_compare_match_register (uint8 duty)
 {
   if (duty < 100)
   {
-    /* A:4us */
+    /* A:16us */
     TMR16_GRA1H = 0;
     TMR16_GRA1L = 100;
     /* duty設定，50で50% */
@@ -329,7 +331,7 @@ enable_TMR16ch1 (void)
   TMR16_TSTR = TMR16_TSTR | 0x02;
 }
 
-////////////////////16bit_ch1////////////////////
+////////////////////16bit_ch2////////////////////
 void
 disable_TMR16ch2 (void)
 {
@@ -345,8 +347,9 @@ disable_TMR16ch2A_interrupt (void)
 void
 set_TMR16ch2_clock_source (void)
 {
-  /* 内部クロック/1 */
-  TMR16_16TCR2 = TMR16_16TCR2 & ~0x07;
+  /* 内部クロック/4 */
+  TMR16_16TCR2 = TMR16_16TCR2 | 0x02;
+  TMR16_16TCR2 = TMR16_16TCR2 & ~0x05;
 }
 
 void
@@ -362,7 +365,7 @@ set_TMR16ch2_compare_match_register (uint8 duty)
 {
   if (duty < 100)
   {
-    /* A:4us */
+    /* A:16us */
     TMR16_GRA2H = 0;
     TMR16_GRA2L = 100;
     /* duty設定，50で50% */

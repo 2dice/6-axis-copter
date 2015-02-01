@@ -187,7 +187,7 @@ timer16_0ch_pwm_init (void)
 
   set_TMR16ch0_clock_source ();
   set_TMR16ch0_counter_reset_condition ();
-  set_TMR16ch0_compare_match_register ((uint8) 75);
+  set_TMR16ch0_compare_match_register ((uint8) 10);
   set_TIOCA0_pin_function ();
 
   enable_TMR16ch0 ();
@@ -201,7 +201,7 @@ timer16_1ch_pwm_init (void)
 
   set_TMR16ch1_clock_source ();
   set_TMR16ch1_counter_reset_condition ();
-  set_TMR16ch1_compare_match_register ((uint8) 75);
+  set_TMR16ch1_compare_match_register ((uint8) 50);
   set_TIOCA1_pin_function ();
 
   enable_TMR16ch1 ();
@@ -234,18 +234,19 @@ clear_TMR8ch3A_compare_match_flag ()
 }
 
 ////////////////////motor driver interface////////////////////
-/* void */
-/* motor_driver_init (void) */
-/* { */
-/*   timer8_0ch_pwm_init (); */
-/*   timer8_1ch_pwm_init (); */
-/*   timer8_2ch_pwm_init (); */
-/*   timer16_0ch_pwm_init (); */
-/*   timer16_1ch_pwm_init (); */
-/*   timer16_2ch_pwm_init (); */
-/*  */
-/*   motor_driver_enable (); */
-/* } */
+void
+motor_driver_init (void)
+{
+  timer8_0ch_pwm_init ();
+  timer8_1ch_pwm_init ();
+  timer8_2ch_pwm_init ();
+  timer16_0ch_pwm_init ();
+  timer16_1ch_pwm_init ();
+  timer16_2ch_pwm_init ();
+
+  motor_driver_direction_enable ();
+  motor_driver2_direction ((bool)1);
+}
 
 
 ////////////////////AD converter interface////////////////////
@@ -344,15 +345,6 @@ gyroscope_init (void)
   enable_gyroscope ();
 }
 
-static void
-motor_driver_init (void)
-{
-  set_motor_driver_parameter ();
-
-  motor_driver_direction_enable ();
-  motor_driver1_direction ((bool)1);
-}
-
 void
 I2C_init (void)
 {
@@ -369,8 +361,6 @@ I2C_init (void)
   acceleration_init ();
 
   gyroscope_init ();
-
-  motor_driver_init ();
 }
 
 /* TODO:get関数をenumのXYZを引数にして統合 */
@@ -433,14 +423,4 @@ get_gyroscope_z (void)
   gyroscope_z = read_gyroscope_z ();
 
   return gyroscope_z;
-}
-
-int8
-get_driver_status (void)
-{
-  int8 driver_status = 0;
-
-  driver_status = read_driver_status ();
-
-  return driver_status;
 }

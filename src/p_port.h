@@ -15,6 +15,6 @@ set_PORT83_CS_output (void);
 void
 motor_driver_direction_enable (void);
 void
-motor_driver1_direction (bool);
+motor_driver2_direction (bool);
 
 #endif
