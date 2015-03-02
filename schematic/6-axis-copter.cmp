@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 2015/02/20 23:41:38
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 2015/03/02 22:37:56
 
 BeginCmp
 TimeStamp = /54DCAC22;
@@ -743,45 +743,45 @@ IdModule  = TB6588FG;
 EndCmp
 
 BeginCmp
-TimeStamp = /54DDA235;
+TimeStamp = /54F4651E;
 Reference = M600;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E0BAA3;
+TimeStamp = /54F46546;
 Reference = M610;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E0C0D7;
+TimeStamp = /54F4656E;
 Reference = M620;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E0D687;
+TimeStamp = /54F46596;
 Reference = M630;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E0D83F;
+TimeStamp = /54F465C8;
 Reference = M640;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
-TimeStamp = /54E0DDA8;
+TimeStamp = /54F465F0;
 Reference = M650;
-ValeurCmp = L2508A-3500;
-IdModule  = L2508A-3500;
+ValeurCmp = HK-AP05;
+IdModule  = HK-AP05;
 EndCmp
 
 BeginCmp
@@ -1025,7 +1025,7 @@ EndCmp
 BeginCmp
 TimeStamp = /54E0C137;
 Reference = R620;
-ValeurCmp = 4.7k;
+ValeurCmp = 4.7kJ;
 IdModule  = 1608;
 EndCmp
 

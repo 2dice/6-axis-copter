@@ -1,6 +1,6 @@
-update=2015/02/15 21:25:33
+update=2015/02/28 14:06:25
 version=1
-last_client=cvpcb
+last_client=eeschema
 [pcbnew]
 version=1
 LastNetListRead=
@@ -25,6 +25,11 @@ LibName1=libraries/2dice
 LibDir=
 [general]
 version=1
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms
 [eeschema]
 version=1
 LibDir=
@@ -65,8 +70,3 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=libraries/2dice
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms

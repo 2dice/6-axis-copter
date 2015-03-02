@@ -1,4 +1,4 @@
-eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/02/20 23:41:06
+eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/03/02 22:37:22
 #コンポーネント ( リファレンス順 )
 | BD200      H8-PRO-BOARD
 | C100       22u(3225)   
@@ -106,12 +106,12 @@ eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/02/20 23:41:06
 | IC630      TB6588FG    
 | IC640      TB6588FG    
 | IC650      TB6588FG    
-| M600       L2508A-3500 
-| M610       L2508A-3500 
-| M620       L2508A-3500 
-| M630       L2508A-3500 
-| M640       L2508A-3500 
-| M650       L2508A-3500 
+| M600       HK-AP05     
+| M610       HK-AP05     
+| M620       HK-AP05     
+| M630       HK-AP05     
+| M640       HK-AP05     
+| M650       HK-AP05     
 | R110       3.9kJ       
 | R111       1.5kJ       
 | R120       6.2kJ       
@@ -146,7 +146,7 @@ eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/02/20 23:41:06
 | R614       10kJ        
 | R615       10kJ        
 | R616       0.2F(2012)  
-| R620       4.7k        
+| R620       4.7kJ       
 | R621       220kJ       
 | R622       20kJ        
 | R623       1kJ         
@@ -293,12 +293,12 @@ eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/02/20 23:41:06
 | TB6588FG     IC630     
 | TB6588FG     IC640     
 | TB6588FG     IC650     
-| L2508A-3500  M600      
-| L2508A-3500  M610      
-| L2508A-3500  M620      
-| L2508A-3500  M630      
-| L2508A-3500  M640      
-| L2508A-3500  M650      
+| HK-AP05      M600      
+| HK-AP05      M610      
+| HK-AP05      M620      
+| HK-AP05      M630      
+| HK-AP05      M640      
+| HK-AP05      M650      
 | 0.02D(3216)  R140      
 | 0.2F(2012)   R606      
 | 0.2F(2012)   R616      
@@ -328,7 +328,7 @@ eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 2015/02/20 23:41:06
 | 4.7kJ        R502      
 | 4.7kJ        R600      
 | 4.7kJ        R610      
-| 4.7k         R620      
+| 4.7kJ        R620      
 | 4.7kJ        R630      
 | 4.7kJ        R640      
 | 4.7kJ        R650      
