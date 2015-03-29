@@ -20,7 +20,7 @@ H8WRITE = ./tools/h8write/h8write
 H8WRITE_SERDEV = /dev/cu.usbserial
 
 OBJS  = vector.o startup.o main.o interrupt.o
-OBJS += lib.o pi.o p_serial.o p_dram.o p_port.o p_timer.o p_ADC.o p_I2C.o
+OBJS += lib.o pi.o p_serial.o p_dram.o p_port.o p_timer.o p_ADC.o p_I2C.o task.o
 
 TARGET = scop
 
