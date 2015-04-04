@@ -59,6 +59,20 @@ task_80ms (void)
   uint8 i;
   int8 pwm;
 
+  if(BVave < 205)
+  {
+    put_string ("LowBatt");
+    put_string ("\n");
+    set_Yp_PWM(0);
+    set_Yn_PWM(0);
+    set_Xp_PWM(0);
+    set_Xn_PWM(0);
+    set_Zp_PWM(0);
+    set_Zn_PWM(0);
+
+    return;
+  }
+
   for (i = 0; i < 8; i++)
   {
     D1ave  += D1row[i];
@@ -165,6 +179,7 @@ task_80ms (void)
   pwm = get_Yp_PWM();
   put_dec ((uint16)pwm);
   put_string ("\n");
+
 }
 
 
