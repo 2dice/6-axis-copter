@@ -11,9 +11,9 @@ typedef unsigned char  uint8;
 typedef unsigned short uint16;
 typedef unsigned long  uint32;
 
-typedef char  int8;
-typedef short int16;
-typedef short bool;
-typedef long  int32;
+typedef signed char  int8;
+typedef signed short int16;
+typedef signed short bool;
+typedef signed long  int32;
 
 #endif

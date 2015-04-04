@@ -143,7 +143,7 @@ timer8_0ch_pwm_init (void)
   disable_TMR8ch0_interrupt ();
   set_TMO0_pin_function ();
   set_TMR8ch0_counter_reset_condition ();
-  set_TMR8ch0_compare_match_register ((uint8) 50);
+  set_TMR8ch0_compare_match_register ((uint8) 20);
   set_TMR8ch0_clock_source ();
 }
 
@@ -153,7 +153,7 @@ timer8_1ch_pwm_init (void)
   disable_TMR8ch1_interrupt ();
   set_TMIO1_pin_function ();
   set_TMR8ch1_counter_reset_condition ();
-  set_TMR8ch1_compare_match_register ((uint8) 50);
+  set_TMR8ch1_compare_match_register ((uint8) 20);
   set_TMR8ch1_clock_source ();
 }
 
@@ -163,7 +163,7 @@ timer8_2ch_pwm_init (void)
   disable_TMR8ch2_interrupt ();
   set_TMO2_pin_function ();
   set_TMR8ch2_counter_reset_condition ();
-  set_TMR8ch2_compare_match_register ((uint8) 50);
+  set_TMR8ch2_compare_match_register ((uint8) 20);
   set_TMR8ch2_clock_source ();
 }
 
@@ -187,7 +187,7 @@ timer16_0ch_pwm_init (void)
 
   set_TMR16ch0_clock_source ();
   set_TMR16ch0_counter_reset_condition ();
-  set_TMR16ch0_compare_match_register ((uint8) 10);
+  set_TMR16ch0_compare_match_register ((uint8) 20);
   set_TIOCA0_pin_function ();
 
   enable_TMR16ch0 ();
@@ -201,7 +201,7 @@ timer16_1ch_pwm_init (void)
 
   set_TMR16ch1_clock_source ();
   set_TMR16ch1_counter_reset_condition ();
-  set_TMR16ch1_compare_match_register ((uint8) 50);
+  set_TMR16ch1_compare_match_register ((uint8) 20);
   set_TIOCA1_pin_function ();
 
   enable_TMR16ch1 ();
@@ -215,7 +215,7 @@ timer16_2ch_pwm_init (void)
 
   set_TMR16ch2_clock_source ();
   set_TMR16ch2_counter_reset_condition ();
-  set_TMR16ch2_compare_match_register ((uint8) 50);
+  set_TMR16ch2_compare_match_register ((uint8) 20);
   set_TIOCA2_pin_function ();
 
   enable_TMR16ch2 ();
@@ -245,9 +245,193 @@ motor_driver_init (void)
   timer16_2ch_pwm_init ();
 
   motor_driver_direction_enable ();
+  motor_driver1_direction ((bool)1);
   motor_driver2_direction ((bool)1);
+  motor_driver3_direction ((bool)1);
+  motor_driver4_direction ((bool)1);
+  motor_driver5_direction ((bool)1);
+  motor_driver6_direction ((bool)1);
 }
 
+void
+set_Yp_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver1_direction ((bool)0);
+    duty *= -1;
+    set_TMR16ch0_compare_match_register ((uint8)duty);
+  }
+  else
+  {
+    motor_driver1_direction ((bool)1);
+    set_TMR16ch0_compare_match_register ((uint8)duty);
+  }
+}
+
+void
+set_Yn_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver2_direction ((bool)0);
+    duty *= -1;
+    set_TMR16ch1_compare_match_register ((uint8)duty);
+  }
+  else
+  {
+    motor_driver2_direction ((bool)1);
+    set_TMR16ch1_compare_match_register ((uint8)duty);
+  }
+}
+
+void
+set_Xp_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver3_direction ((bool)0);
+    duty *= -1;
+    set_TMR16ch2_compare_match_register ((uint8)duty);
+  }
+  else
+  {
+    motor_driver3_direction ((bool)1);
+    set_TMR16ch2_compare_match_register ((uint8)duty);
+  }
+}
+
+void
+set_Xn_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver4_direction ((bool)0);
+    duty *= -1;
+    set_TMR8ch0_compare_match_register ((uint8)duty);
+  }
+  else
+  {
+    motor_driver4_direction ((bool)1);
+    set_TMR8ch0_compare_match_register ((uint8)duty);
+  }
+}
+
+void
+set_Zp_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver5_direction ((bool)0);
+    duty *= -1;
+    set_TMR8ch1_compare_match_register ((uint8) duty);
+  }
+  else
+  {
+    motor_driver5_direction ((bool)1);
+    set_TMR8ch1_compare_match_register ((uint8) duty);
+  }
+}
+
+void
+set_Zn_PWM (int8 duty)
+{
+  if (duty < 0)
+  {
+    motor_driver6_direction ((bool)0);
+    duty *= -1;
+    set_TMR8ch2_compare_match_register ((uint8) duty);
+  }
+  else
+  {
+    motor_driver6_direction ((bool)1);
+    set_TMR8ch2_compare_match_register ((uint8) duty);
+  }
+}
+
+int8
+get_Yp_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR8ch0_compare_match_register ();
+  dir = get_motor_driver1_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
+
+int8
+get_Yn_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR8ch1_compare_match_register ();
+  dir = get_motor_driver2_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
+
+int8
+get_Xp_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR8ch2_compare_match_register ();
+  dir = get_motor_driver3_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
+
+int8
+get_Xn_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR16ch0_compare_match_register ();
+  dir = get_motor_driver4_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
+
+int8
+get_Zp_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR16ch1_compare_match_register ();
+  dir = get_motor_driver5_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
+
+int8
+get_Zn_PWM (void)
+{
+  int8 duty;
+  bool dir;
+
+  duty = get_TMR16ch2_compare_match_register ();
+  dir = get_motor_driver6_direction ();
+  if(dir == 0)
+    duty *= -1;
+
+  return duty;
+}
 
 ////////////////////AD converter interface////////////////////
 void

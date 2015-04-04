@@ -55,7 +55,10 @@ task_10ms (uint8 timer_count)
 void
 task_80ms (void)
 {
+/* TODO:平均算出を関数に切り出し */
   uint8 i;
+  int8 pwm;
+
   for (i = 0; i < 8; i++)
   {
     D1ave  += D1row[i];
@@ -142,6 +145,25 @@ task_80ms (void)
 
   put_string ("GZ:");
   put_hex ((uint32)GZave, 4);
+  put_string ("\n");
+
+  pwm = get_Yp_PWM();
+
+  if(pwm==-99)
+  {
+    pwm = -40;
+  }
+
+  set_Yp_PWM(pwm - 1);
+  set_Yn_PWM(pwm - 1);
+  set_Xp_PWM(pwm - 1);
+  set_Xn_PWM(pwm - 1);
+  set_Zp_PWM(pwm - 1);
+  set_Zn_PWM(pwm - 1);
+
+  put_string ("Yp:");
+  pwm = get_Yp_PWM();
+  put_dec ((uint16)pwm);
   put_string ("\n");
 }
 

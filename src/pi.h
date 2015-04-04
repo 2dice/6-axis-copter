@@ -30,6 +30,30 @@ clear_TMR8ch3A_compare_match_flag (void);
 
 void
 motor_driver_init (void);
+void
+set_Yp_PWM (int8);
+void
+set_Yn_PWM (int8);
+void
+set_Xp_PWM (int8);
+void
+set_Xn_PWM (int8);
+void
+set_Zp_PWM (int8);
+void
+set_Zn_PWM (int8);
+int8
+get_Yp_PWM (void);
+int8
+get_Yn_PWM (void);
+int8
+get_Xp_PWM (void);
+int8
+get_Xn_PWM (void);
+int8
+get_Zp_PWM (void);
+int8
+get_Zn_PWM (void);
 
 void
 ADC_init (void);

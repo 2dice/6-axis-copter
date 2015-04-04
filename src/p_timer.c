@@ -78,12 +78,19 @@ set_TMR8ch0_compare_match_register (uint8 duty)
     TMR8_TCORB0 = duty;
   }
 }
+
 void
-set_TMR8ch1_clock_source (void)
+set_TMR8ch0_clock_source (void)
 {
   /* φ/8 */
-  TMR8_8TCR1 = TMR8_8TCR1 & ~0x06;
-  TMR8_8TCR1 = TMR8_8TCR1 | 0x01;
+  TMR8_8TCR0 = TMR8_8TCR0 & ~0x06;
+  TMR8_8TCR0 = TMR8_8TCR0 | 0x01;
+}
+
+uint8
+get_TMR8ch0_compare_match_register (void)
+{
+  return TMR8_TCORB0;
 }
 
 ////////////////////8bit_ch1////////////////////
@@ -120,12 +127,19 @@ set_TMR8ch1_compare_match_register (uint8 duty)
     TMR8_TCORB1 = duty;
   }
 }
+
 void
-set_TMR8ch0_clock_source (void)
+set_TMR8ch1_clock_source (void)
 {
   /* φ/8 */
-  TMR8_8TCR0 = TMR8_8TCR0 & ~0x06;
-  TMR8_8TCR0 = TMR8_8TCR0 | 0x01;
+  TMR8_8TCR1 = TMR8_8TCR1 & ~0x06;
+  TMR8_8TCR1 = TMR8_8TCR1 | 0x01;
+}
+
+uint8
+get_TMR8ch1_compare_match_register (void)
+{
+  return TMR8_TCORB1;
 }
 
 ////////////////////8bit_ch2////////////////////
@@ -169,6 +183,13 @@ set_TMR8ch2_clock_source (void)
   TMR8_8TCR2 = TMR8_8TCR2 & ~0x06;
   TMR8_8TCR2 = TMR8_8TCR2 | 0x01;
 }
+
+uint8
+get_TMR8ch2_compare_match_register (void)
+{
+  return TMR8_TCORB2;
+}
+
 ////////////////////8bit_ch3////////////////////
 void
 disable_TMR8ch3_interrupt (void)
@@ -276,6 +297,12 @@ enable_TMR16ch0 (void)
   TMR16_TSTR = TMR16_TSTR | 0x01;
 }
 
+uint8
+get_TMR16ch0_compare_match_register (void)
+{
+  return TMR16_GRB0L;
+}
+
 ////////////////////16bit_ch1////////////////////
 void
 disable_TMR16ch1 (void)
@@ -329,6 +356,12 @@ void
 enable_TMR16ch1 (void)
 {
   TMR16_TSTR = TMR16_TSTR | 0x02;
+}
+
+uint8
+get_TMR16ch1_compare_match_register (void)
+{
+  return TMR16_GRB1L;
 }
 
 ////////////////////16bit_ch2////////////////////
@@ -385,3 +418,10 @@ enable_TMR16ch2 (void)
 {
   TMR16_TSTR = TMR16_TSTR | 0x04;
 }
+
+uint8
+get_TMR16ch2_compare_match_register (void)
+{
+  return TMR16_GRB2L;
+}
+

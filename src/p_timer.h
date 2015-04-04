@@ -10,9 +10,11 @@ set_TMO0_pin_function (void);
 void
 set_TMR8ch0_counter_reset_condition (void);
 void
-set_TMR8ch0_compare_match_register (uint8 duty);
+set_TMR8ch0_compare_match_register (uint8);
 void
 set_TMR8ch0_clock_source (void);
+uint8
+get_TMR8ch0_compare_match_register (void);
 
 void
 disable_TMR8ch1_interrupt (void);
@@ -21,9 +23,11 @@ set_TMIO1_pin_function (void);
 void
 set_TMR8ch1_counter_reset_condition (void);
 void
-set_TMR8ch1_compare_match_register (uint8 duty);
+set_TMR8ch1_compare_match_register (uint8);
 void
 set_TMR8ch1_clock_source (void);
+uint8
+get_TMR8ch1_compare_match_register (void);
 
 void
 disable_TMR8ch2_interrupt (void);
@@ -32,9 +36,11 @@ set_TMO2_pin_function (void);
 void
 set_TMR8ch2_counter_reset_condition (void);
 void
-set_TMR8ch2_compare_match_register (uint8 duty);
+set_TMR8ch2_compare_match_register (uint8);
 void
 set_TMR8ch2_clock_source (void);
+uint8
+get_TMR8ch2_compare_match_register (void);
 
 void
 disable_TMR8ch3_interrupt (void);
@@ -62,11 +68,13 @@ set_TMR16ch0_clock_source (void);
 void
 set_TMR16ch0_counter_reset_condition (void);
 void
-set_TMR16ch0_compare_match_register (uint8 duty);
+set_TMR16ch0_compare_match_register (uint8);
 void
 set_TIOCA0_pin_function (void);
 void
 enable_TMR16ch0 (void);
+uint8
+get_TMR16ch0_compare_match_register (void);
 
 void
 disable_TMR16ch1 (void);
@@ -77,11 +85,13 @@ set_TMR16ch1_clock_source (void);
 void
 set_TMR16ch1_counter_reset_condition (void);
 void
-set_TMR16ch1_compare_match_register (uint8 duty);
+set_TMR16ch1_compare_match_register (uint8);
 void
 set_TIOCA1_pin_function (void);
 void
 enable_TMR16ch1 (void);
+uint8
+get_TMR16ch1_compare_match_register (void);
 
 void
 disable_TMR16ch2 (void);
@@ -92,10 +102,12 @@ set_TMR16ch2_clock_source (void);
 void
 set_TMR16ch2_counter_reset_condition (void);
 void
-set_TMR16ch2_compare_match_register (uint8 duty);
+set_TMR16ch2_compare_match_register (uint8);
 void
 set_TIOCA2_pin_function (void);
 void
 enable_TMR16ch2 (void);
+uint8
+get_TMR16ch2_compare_match_register (void);
 
 #endif
