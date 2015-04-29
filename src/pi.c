@@ -143,7 +143,7 @@ timer8_0ch_pwm_init (void)
   disable_TMR8ch0_interrupt ();
   set_TMO0_pin_function ();
   set_TMR8ch0_counter_reset_condition ();
-  set_TMR8ch0_compare_match_register ((uint8) 20);
+  set_TMR8ch0_compare_match_register ((uint8) 55);
   set_TMR8ch0_clock_source ();
 }
 
@@ -153,7 +153,7 @@ timer8_1ch_pwm_init (void)
   disable_TMR8ch1_interrupt ();
   set_TMIO1_pin_function ();
   set_TMR8ch1_counter_reset_condition ();
-  set_TMR8ch1_compare_match_register ((uint8) 20);
+  set_TMR8ch1_compare_match_register ((uint8) 55);
   set_TMR8ch1_clock_source ();
 }
 
@@ -163,7 +163,7 @@ timer8_2ch_pwm_init (void)
   disable_TMR8ch2_interrupt ();
   set_TMO2_pin_function ();
   set_TMR8ch2_counter_reset_condition ();
-  set_TMR8ch2_compare_match_register ((uint8) 20);
+  set_TMR8ch2_compare_match_register ((uint8) 55);
   set_TMR8ch2_clock_source ();
 }
 
@@ -187,7 +187,7 @@ timer16_0ch_pwm_init (void)
 
   set_TMR16ch0_clock_source ();
   set_TMR16ch0_counter_reset_condition ();
-  set_TMR16ch0_compare_match_register ((uint8) 20);
+  set_TMR16ch0_compare_match_register ((uint8) 55);
   set_TIOCA0_pin_function ();
 
   enable_TMR16ch0 ();
@@ -201,7 +201,7 @@ timer16_1ch_pwm_init (void)
 
   set_TMR16ch1_clock_source ();
   set_TMR16ch1_counter_reset_condition ();
-  set_TMR16ch1_compare_match_register ((uint8) 20);
+  set_TMR16ch1_compare_match_register ((uint8) 55);
   set_TIOCA1_pin_function ();
 
   enable_TMR16ch1 ();
@@ -215,7 +215,7 @@ timer16_2ch_pwm_init (void)
 
   set_TMR16ch2_clock_source ();
   set_TMR16ch2_counter_reset_condition ();
-  set_TMR16ch2_compare_match_register ((uint8) 20);
+  set_TMR16ch2_compare_match_register ((uint8) 55);
   set_TIOCA2_pin_function ();
 
   enable_TMR16ch2 ();
@@ -253,6 +253,7 @@ motor_driver_init (void)
   motor_driver6_direction ((bool)1);
 }
 
+/* TODO:99以上-99以下はリターン */
 void
 set_Yp_PWM (int8 duty)
 {
@@ -355,7 +356,7 @@ get_Yp_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR8ch0_compare_match_register ();
+  duty = get_TMR16ch0_compare_match_register ();
   dir = get_motor_driver1_direction ();
   if(dir == 0)
     duty *= -1;
@@ -369,7 +370,7 @@ get_Yn_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR8ch1_compare_match_register ();
+  duty = get_TMR16ch1_compare_match_register ();
   dir = get_motor_driver2_direction ();
   if(dir == 0)
     duty *= -1;
@@ -383,7 +384,7 @@ get_Xp_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR8ch2_compare_match_register ();
+  duty = get_TMR16ch2_compare_match_register ();
   dir = get_motor_driver3_direction ();
   if(dir == 0)
     duty *= -1;
@@ -397,7 +398,7 @@ get_Xn_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR16ch0_compare_match_register ();
+  duty = get_TMR8ch0_compare_match_register ();
   dir = get_motor_driver4_direction ();
   if(dir == 0)
     duty *= -1;
@@ -411,7 +412,7 @@ get_Zp_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR16ch1_compare_match_register ();
+  duty = get_TMR8ch1_compare_match_register ();
   dir = get_motor_driver5_direction ();
   if(dir == 0)
     duty *= -1;
@@ -425,7 +426,7 @@ get_Zn_PWM (void)
   int8 duty;
   bool dir;
 
-  duty = get_TMR16ch2_compare_match_register ();
+  duty = get_TMR8ch2_compare_match_register ();
   dir = get_motor_driver6_direction ();
   if(dir == 0)
     duty *= -1;
@@ -549,12 +550,13 @@ I2C_init (void)
 
 /* TODO:get関数をenumのXYZを引数にして統合 */
 /* TODO:returnで直接関数を返すように変更 */
+/* 基板とセンサの向きが違うためここで補正．センサX=基板Y，センサY=基板-X */
 int16
 get_acceleration_x (void)
 {
   int16 acceleration_x = 0;
 
-  acceleration_x = read_acceleration_x ();
+  acceleration_x = -1 * read_acceleration_y ();
 
   return acceleration_x;
 }
@@ -564,7 +566,7 @@ get_acceleration_y (void)
 {
   int16 acceleration_y = 0;
 
-  acceleration_y = read_acceleration_y ();
+  acceleration_y = read_acceleration_x ();
 
   return acceleration_y;
 }
