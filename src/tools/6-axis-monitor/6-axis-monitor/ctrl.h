@@ -12,7 +12,24 @@ class Ctrl : public QQuickItem
 public:
     explicit Ctrl(QQuickItem *parent = 0);
     ~Ctrl();
+    Q_INVOKABLE qreal get_D1(void);
+    Q_INVOKABLE qreal get_D2(void);
+    Q_INVOKABLE qreal get_D3(void);
+    Q_INVOKABLE qreal get_D4(void);
+    Q_INVOKABLE qreal get_D5(void);
+    Q_INVOKABLE qreal get_D6(void);
+    Q_INVOKABLE qreal get_GX(void);
+    Q_INVOKABLE qreal get_GY(void);
+    Q_INVOKABLE qreal get_GZ(void);
+    Q_INVOKABLE qreal get_AX(void);
+    Q_INVOKABLE qreal get_AY(void);
     Q_INVOKABLE qreal get_AZ(void);
+    Q_INVOKABLE qreal get_Yp(void);
+    Q_INVOKABLE qreal get_Yn(void);
+    Q_INVOKABLE qreal get_Xp(void);
+    Q_INVOKABLE qreal get_Xn(void);
+    Q_INVOKABLE qreal get_Zp(void);
+    Q_INVOKABLE qreal get_Zn(void);
 private:
     serial_if *serial_if;
     Data *data;

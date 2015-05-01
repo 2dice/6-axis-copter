@@ -11,7 +11,24 @@ class Data : public QObject
 public:
     explicit Data(QObject *parent = 0);
     ~Data();
+    qreal D1(void);
+    qreal D2(void);
+    qreal D3(void);
+    qreal D4(void);
+    qreal D5(void);
+    qreal D6(void);
+    qreal GX(void);
+    qreal GY(void);
+    qreal GZ(void);
+    qreal AX(void);
+    qreal AY(void);
     qreal AZ(void);
+    qreal Yp(void);
+    qreal Yn(void);
+    qreal Xp(void);
+    qreal Xn(void);
+    qreal Zp(void);
+    qreal Zn(void);
 
 private:
   struct SensorData {
@@ -30,6 +47,12 @@ private:
       int16_t GX[1000];
       int16_t GY[1000];
       int16_t GZ[1000];
+      int16_t Yp[1000];
+      int16_t Yn[1000];
+      int16_t Xp[1000];
+      int16_t Xn[1000];
+      int16_t Zp[1000];
+      int16_t Zn[1000];
   };
   SensorData sensorData;
   QByteArray format_data;

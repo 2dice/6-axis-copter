@@ -113,7 +113,7 @@ task_80ms (void)
   GYave  /= 8;
   GZave  /= 8;
 
-  /* 電源電圧9.3V以下(176)で放電限界(高負荷時)．ちなみに無負荷時は7.2V(205) */
+  /* 電源電圧9.3V以下(176)で放電限界(高負荷時)．ちなみに無負荷時は11.1V(210) */
   if(BVave < 176)
   {
     put_string ("LowBatt");
@@ -128,62 +128,6 @@ task_80ms (void)
 
     return;
   }
-
-  /* put_string ("D1:"); */
-  /* put_dec (D1ave); */
-  /* put_string ("\n"); */
-
-  put_string ("D2:");
-  put_dec (D2ave);
-  put_string ("\n");
-
-  /* put_string ("D3:"); */
-  /* put_dec (D3ave); */
-  /* put_string ("\n"); */
-
-  put_string ("D4:");
-  put_dec (D4ave);
-  put_string ("\n");
-
-  /* put_string ("D5:"); */
-  /* put_dec (D5ave); */
-  /* put_string ("\n"); */
-
-  put_string ("D6:");
-  put_dec (D6ave);
-  put_string ("\n");
-
-  put_string ("BV:");
-  put_dec (BVave);
-  put_string ("\n");
-
-  put_string ("BI:");
-  put_dec (BIave);
-  put_string ("\n");
-
-  put_string ("AX:");
-  put_hex ((uint32)AXave, 4);
-  put_string ("\n");
-
-  put_string ("AY:");
-  put_hex ((uint32)AYave, 4);
-  put_string ("\n");
-
-  put_string ("AZ:");
-  put_hex ((uint32)AZave, 4);
-  put_string ("\n");
-
-  /* put_string ("GX:"); */
-  /* put_hex ((uint32)GXave, 4); */
-  /* put_string ("\n"); */
-  /*  */
-  /* put_string ("GY:"); */
-  /* put_hex ((uint32)GYave, 4); */
-  /* put_string ("\n"); */
-  /*  */
-  /* put_string ("GZ:"); */
-  /* put_hex ((uint32)GZave, 4); */
-  /* put_string ("\n"); */
 
   pwm_Yp = get_Yp_PWM();
   pwm_Yn = get_Yn_PWM();
@@ -313,6 +257,62 @@ task_80ms (void)
   set_Zp_PWM(pwm_Zp);
   set_Zn_PWM(pwm_Zn);
 
+  put_string ("D1:");
+  put_dec (D1ave);
+  put_string ("\n");
+
+  put_string ("D2:");
+  put_dec (D2ave);
+  put_string ("\n");
+
+  put_string ("D3:");
+  put_dec (D3ave);
+  put_string ("\n");
+
+  put_string ("D4:");
+  put_dec (D4ave);
+  put_string ("\n");
+
+  put_string ("D5:");
+  put_dec (D5ave);
+  put_string ("\n");
+
+  put_string ("D6:");
+  put_dec (D6ave);
+  put_string ("\n");
+
+  put_string ("BV:");
+  put_dec (BVave);
+  put_string ("\n");
+
+  put_string ("BI:");
+  put_dec (BIave);
+  put_string ("\n");
+
+  put_string ("AX:");
+  put_hex ((uint32)AXave, 4);
+  put_string ("\n");
+
+  put_string ("AY:");
+  put_hex ((uint32)AYave, 4);
+  put_string ("\n");
+
+  put_string ("AZ:");
+  put_hex ((uint32)AZave, 4);
+  put_string ("\n");
+
+  put_string ("GX:");
+  put_hex ((uint32)GXave, 4);
+  put_string ("\n");
+
+  put_string ("GY:");
+  put_hex ((uint32)GYave, 4);
+  put_string ("\n");
+
+  put_string ("GZ:");
+  put_hex ((uint32)GZave, 4);
+  put_string ("\n");
+
   put_string ("Yp:");
   put_dec ((uint16)pwm_Yp);
   put_string ("\n");
@@ -336,7 +336,6 @@ task_80ms (void)
   put_string ("Zn:");
   put_dec ((uint16)pwm_Zn);
   put_string ("\n");
-
 }
 
 

@@ -13,10 +13,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<Ctrl>("Ctrl", 1, 0, "Ctrl");
 
     QQuickView view;
-    view.resize(800, 400);
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.setSource(QUrl("qrc:///main.qml"));
-    view.show();
+    view.showFullScreen();
 
     return a.exec();
 }

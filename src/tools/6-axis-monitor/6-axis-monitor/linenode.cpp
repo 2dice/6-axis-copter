@@ -43,8 +43,8 @@ void LineNode::updateGeometry(const QRectF &bounds, const QList<qreal> &samples)
 
     LineVertex *v = (LineVertex *)m_geometry.vertexData();
     for (int i=0; i<samples.size(); ++i){
-        v[i*2+0].set((int)(x + dx * i), (int)(y - samples.at(i) * h - 1), 0);
-        v[i*2+1].set((int)(x + dx * i), (int)(y - samples.at(i) * h + 1), 1);
+        v[i*2+0].set((int)(x + dx * i), (int)(y - samples.at(i) * h - h * 500), 0);
+        v[i*2+1].set((int)(x + dx * i), (int)(y - samples.at(i) * h - h * 500-1), 1);
     }
 
     // Tell the scenegraph we updated the geometry..

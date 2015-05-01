@@ -46,12 +46,16 @@ void GridNode::setRect(const QRectF &rect)
         v[i*2+1].set(dx, y + h);
     }
     v += vCount * 2;
+
     // Then write the horizontal lines
     for (int i=0; i<hCount; ++i)  {
         float dy = i * h / Y_GRID_SIZE;
         v[i*2].set(x, dy);
         v[i*2+1].set(x + w, dy);
     }
+    // change the centor line to a heavy line
+    v[0*2].set(x, h / 2 + 1);
+    v[0*2+1].set(x + w, h / 2 + 1);
 
     // Tell the scenegraph we updated the geometry..
     markDirty(QSGNode::DirtyGeometry);

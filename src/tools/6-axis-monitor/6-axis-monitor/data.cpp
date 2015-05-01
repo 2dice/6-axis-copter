@@ -128,11 +128,132 @@ void Data::distributeData(QByteArray &data)
     sensorData.GZ[sensorData.currentElement] = data.toInt(&ok, 16);
     qDebug() << "GZ =" << sensorData.GZ[sensorData.currentElement];
   }
+  else if (data.contains("Yp:"))
+  {
+    data.remove(0,3);
+    sensorData.Yp[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Yp =" << sensorData.Yp[sensorData.currentElement];
+  }
+  else if (data.contains("Yn:"))
+  {
+    data.remove(0,3);
+    sensorData.Yn[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Yn =" << sensorData.Yn[sensorData.currentElement];
+  }
+  else if (data.contains("Xp:"))
+  {
+    data.remove(0,3);
+    sensorData.Xp[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Xp =" << sensorData.Xp[sensorData.currentElement];
+  }
+  else if (data.contains("Xn:"))
+  {
+    data.remove(0,3);
+    sensorData.Xn[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Xn =" << sensorData.Xn[sensorData.currentElement];
+  }
+  else if (data.contains("Zp:"))
+  {
+    data.remove(0,3);
+    sensorData.Zp[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Zp =" << sensorData.Zp[sensorData.currentElement];
+  }
+  else if (data.contains("Zn:"))
+  {
+    data.remove(0,3);
+    sensorData.Zn[sensorData.currentElement] = data.toInt(&ok, 10);
+    qDebug() << "Zn =" << sensorData.Zn[sensorData.currentElement];
+  }
   else
     qDebug("other data > %s", qPrintable(data));
+}
+
+qreal Data::D1()
+{
+  return (qreal)sensorData.D1[sensorData.currentElement - 1];
+}
+
+qreal Data::D2()
+{
+  return (qreal)sensorData.D2[sensorData.currentElement - 1];
+}
+
+qreal Data::D3()
+{
+  return (qreal)sensorData.D3[sensorData.currentElement - 1];
+}
+
+qreal Data::D4()
+{
+  return (qreal)sensorData.D4[sensorData.currentElement - 1];
+}
+
+qreal Data::D5()
+{
+  return (qreal)sensorData.D5[sensorData.currentElement - 1];
+}
+
+qreal Data::D6()
+{
+  return (qreal)sensorData.D6[sensorData.currentElement - 1];
+}
+
+qreal Data::GX()
+{
+  return (qreal)sensorData.GX[sensorData.currentElement - 1];
+}
+
+qreal Data::GY()
+{
+  return (qreal)sensorData.GY[sensorData.currentElement - 1];
+}
+
+qreal Data::GZ()
+{
+  return (qreal)sensorData.GZ[sensorData.currentElement - 1];
+}
+
+qreal Data::AX()
+{
+  return (qreal)sensorData.AX[sensorData.currentElement - 1];
+}
+
+qreal Data::AY()
+{
+  return (qreal)sensorData.AY[sensorData.currentElement - 1];
 }
 
 qreal Data::AZ()
 {
   return (qreal)sensorData.AZ[sensorData.currentElement - 1];
+}
+
+qreal Data::Yp()
+{
+  return (qreal)sensorData.Yp[sensorData.currentElement - 1];
+}
+
+qreal Data::Yn()
+{
+  return (qreal)sensorData.Yn[sensorData.currentElement - 1];
+}
+
+qreal Data::Xp()
+{
+  return (qreal)sensorData.Xp[sensorData.currentElement - 1];
+}
+
+qreal Data::Xn()
+{
+  return (qreal)sensorData.Xn[sensorData.currentElement - 1];
+}
+
+qreal Data::Zp()
+{
+  return (qreal)sensorData.Zp[sensorData.currentElement - 1];
+}
+
+qreal Data::Zn()
+{
+  return (qreal)sensorData.Zn[sensorData.currentElement - 1];
 }
