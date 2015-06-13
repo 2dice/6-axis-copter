@@ -129,6 +129,26 @@ task_80ms (void)
     return;
   }
 
+  /* 衝撃があったらモーター停止 */
+  if (AXave > 700 || AXave < -700 || 
+      AYave > 700 || AYave < -700 ||
+      AZave > 700 || AZave < -700 ||
+      GXave > 2000 || GXave < -2000 ||
+      GYave > 2000 || GYave < -2000 ||
+      GZave > 2000 || GZave < -2000)
+  {
+    put_string ("shock");
+    put_string ("\n");
+    set_Yp_PWM(40);
+    set_Yn_PWM(40);
+    set_Xp_PWM(40);
+    set_Xn_PWM(40);
+    set_Zp_PWM(40);
+    set_Zn_PWM(40);
+
+    return;
+  }
+
   pwm_Yp = get_Yp_PWM();
   pwm_Yn = get_Yn_PWM();
   pwm_Xp = get_Xp_PWM();
