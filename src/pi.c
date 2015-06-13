@@ -143,7 +143,7 @@ timer8_0ch_pwm_init (void)
   disable_TMR8ch0_interrupt ();
   set_TMO0_pin_function ();
   set_TMR8ch0_counter_reset_condition ();
-  set_TMR8ch0_compare_match_register ((uint8) 55);
+  set_TMR8ch0_compare_match_register ((uint8) 40);
   set_TMR8ch0_clock_source ();
 }
 
@@ -153,7 +153,7 @@ timer8_1ch_pwm_init (void)
   disable_TMR8ch1_interrupt ();
   set_TMIO1_pin_function ();
   set_TMR8ch1_counter_reset_condition ();
-  set_TMR8ch1_compare_match_register ((uint8) 55);
+  set_TMR8ch1_compare_match_register ((uint8) 40);
   set_TMR8ch1_clock_source ();
 }
 
@@ -163,7 +163,7 @@ timer8_2ch_pwm_init (void)
   disable_TMR8ch2_interrupt ();
   set_TMO2_pin_function ();
   set_TMR8ch2_counter_reset_condition ();
-  set_TMR8ch2_compare_match_register ((uint8) 55);
+  set_TMR8ch2_compare_match_register ((uint8) 40);
   set_TMR8ch2_clock_source ();
 }
 
@@ -187,7 +187,7 @@ timer16_0ch_pwm_init (void)
 
   set_TMR16ch0_clock_source ();
   set_TMR16ch0_counter_reset_condition ();
-  set_TMR16ch0_compare_match_register ((uint8) 55);
+  set_TMR16ch0_compare_match_register ((uint8) 40);
   set_TIOCA0_pin_function ();
 
   enable_TMR16ch0 ();
@@ -201,7 +201,7 @@ timer16_1ch_pwm_init (void)
 
   set_TMR16ch1_clock_source ();
   set_TMR16ch1_counter_reset_condition ();
-  set_TMR16ch1_compare_match_register ((uint8) 55);
+  set_TMR16ch1_compare_match_register ((uint8) 40);
   set_TIOCA1_pin_function ();
 
   enable_TMR16ch1 ();
@@ -215,7 +215,7 @@ timer16_2ch_pwm_init (void)
 
   set_TMR16ch2_clock_source ();
   set_TMR16ch2_counter_reset_condition ();
-  set_TMR16ch2_compare_match_register ((uint8) 55);
+  set_TMR16ch2_compare_match_register ((uint8) 40);
   set_TIOCA2_pin_function ();
 
   enable_TMR16ch2 ();
@@ -254,6 +254,7 @@ motor_driver_init (void)
 }
 
 /* TODO:99以上-99以下はリターン */
+/* TODO:40の下は-40，-40の上は40になるように(-40〜40はペラが回らない)*/
 void
 set_Yp_PWM (int8 duty)
 {

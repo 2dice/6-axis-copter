@@ -64,7 +64,7 @@ task_80ms (void)
   int8 pwm_Zp;
   int8 pwm_Zn;
   static int8 timer_count = 0;
-  const int16 steady_gravity_vector = 151;
+  const int16 steady_gravity_vector = 130;
 
   D1ave = 0;
   D2ave = 0;
@@ -113,8 +113,8 @@ task_80ms (void)
   GYave  /= 8;
   GZave  /= 8;
 
-  /* 電源電圧9.3V以下(176)で放電限界(高負荷時)．ちなみに無負荷時は11.1V(210) */
-  if(BVave < 176)
+  /* 電源電圧9V以下(160)で放電限界(高負荷時)．ちなみに無負荷時は11.1V(196) */
+  if(BVave < 160)
   {
     put_string ("LowBatt");
     put_dec (BVave);
@@ -157,6 +157,7 @@ task_80ms (void)
   pwm_Zn = get_Zn_PWM();
 
   if (timer_count == 3)
+    /* 加速度センサ値によるモータ制御(姿勢制御) */
   {
     /* Yペラで制御できる範囲を定義 */
     if (AYave < steady_gravity_vector - 40 &&
@@ -209,6 +210,7 @@ task_80ms (void)
     timer_count = 0;
   }
   else if (timer_count == 2)
+    /* 測距センサ値によるモータ制御(障害物との距離制御) */
   {
     /* 測距を目標値にするためにプロペラ回転を制御 */
     if (D2ave > 70 || D4ave > 70 || D6ave > 70)
