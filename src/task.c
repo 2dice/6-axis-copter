@@ -77,7 +77,9 @@ task_80ms (void)
   int8 pwm_Zp;
   int8 pwm_Zn;
   static int8 timer_count = 0;
-  const int16 steady_gravity_vector = 130;
+  const int16 AXsteady_gravity_vector = 142;
+  const int16 AYsteady_gravity_vector = 146;
+  const int16 AZsteady_gravity_vector = 168;
 
   /* 80msでの平均値算出 */
   D1ave = 0;
@@ -167,12 +169,12 @@ task_80ms (void)
   {
     put_string ("shock");
     put_string ("\n");
-    set_Yp_PWM(40);
-    set_Yn_PWM(40);
-    set_Xp_PWM(40);
-    set_Xn_PWM(40);
-    set_Zp_PWM(40);
-    set_Zn_PWM(40);
+    set_Yp_PWM(0);
+    set_Yn_PWM(0);
+    set_Xp_PWM(0);
+    set_Xn_PWM(0);
+    set_Zp_PWM(0);
+    set_Zn_PWM(0);
 
     return;
   }
