@@ -32,6 +32,16 @@ static int16 GXave;
 static int16 GYave;
 static int16 GZave;
 
+static uint16 D1movAve = 0;
+static uint16 D2movAve = 0;
+static uint16 D3movAve = 0;
+static uint16 D4movAve = 0;
+static uint16 D5movAve = 0;
+static uint16 D6movAve = 0;
+static int16 AXmovAve = 0;
+static int16 AYmovAve = 0;
+static int16 AZmovAve = 0;
+
 void
 task_10ms (uint8 timer_count)
 {
@@ -113,6 +123,17 @@ task_80ms (void)
   GYave  /= 8;
   GZave  /= 8;
 
+  /* 80msごとに移動平均 */
+  D1movAve = (D1movAve + D1ave) / 2;
+  D2movAve = (D2movAve + D2ave) / 2;
+  D3movAve = (D3movAve + D3ave) / 2;
+  D4movAve = (D4movAve + D4ave) / 2;
+  D5movAve = (D5movAve + D5ave) / 2;
+  D6movAve = (D6movAve + D6ave) / 2;
+  AXmovAve = (AXmovAve + AXave) / 2;
+  AYmovAve = (AYmovAve + AYave) / 2;
+  AZmovAve = (AZmovAve + AZave) / 2;
+
   /* 電源電圧9V以下(160)で放電限界(高負荷時)．ちなみに無負荷時は11.1V(196) */
   if(BVave < 160)
   {
@@ -160,48 +181,48 @@ task_80ms (void)
     /* 加速度センサ値によるモータ制御(姿勢制御) */
   {
     /* Yペラで制御できる範囲を定義 */
-    if (AYave < steady_gravity_vector - 40 &&
-        AXave > 0 &&
-        AZave > 0)
+    if (AYmovAve < AYsteady_gravity_vector - 40 &&
+        AXmovAve > 0 &&
+        AZmovAve > 0)
     {
       pwm_Yp += 1;
       pwm_Yn -= 1;
     }
-    else if (AYave > steady_gravity_vector + 40 &&
-        AXave > 0 &&
-        AZave > 0)
+    else if (AYmovAve > AYsteady_gravity_vector + 40 &&
+        AXmovAve > 0 &&
+        AZmovAve > 0)
     {
       pwm_Yp -= 1;
       pwm_Yn += 1;
     }
 
     /* Xペラで制御できる範囲を定義 */
-    if (AYave > 0 &&
-        AXave < steady_gravity_vector - 40 &&
-        AZave > 0)
+    if (AYmovAve > 0 &&
+        AXmovAve < AXsteady_gravity_vector - 40 &&
+        AZmovAve > 0)
     {
       pwm_Xp += 1;
       pwm_Xn -= 1;
     }
-    else if (AYave > 0 &&
-        AXave > steady_gravity_vector + 40 &&
-        AZave > 0)
+    else if (AYmovAve > 0 &&
+        AXmovAve > AXsteady_gravity_vector + 40 &&
+        AZmovAve > 0)
     {
       pwm_Xp -= 1;
       pwm_Xn += 1;
     }
 
     /* Zペラで制御できる範囲を定義 */
-    if (AYave > 0 &&
-        AXave > 0 &&
-        AZave < steady_gravity_vector - 40)
+    if (AYmovAve > 0 &&
+        AXmovAve > 0 &&
+        AZmovAve < AZsteady_gravity_vector - 40)
     {
       pwm_Zp += 1;
       pwm_Zn -= 1;
     }
-    else if (AYave > 0 &&
-        AXave > 0 &&
-        AZave > steady_gravity_vector + 40)
+    else if (AYmovAve > 0 &&
+        AXmovAve > 0 &&
+        AZmovAve > AZsteady_gravity_vector + 40)
     {
       pwm_Zp -= 1;
       pwm_Zn += 1;
@@ -209,11 +230,12 @@ task_80ms (void)
 
     timer_count = 0;
   }
+
   else if (timer_count == 2)
     /* 測距センサ値によるモータ制御(障害物との距離制御) */
   {
     /* 測距を目標値にするためにプロペラ回転を制御 */
-    if (D2ave > 70 || D4ave > 70 || D6ave > 70)
+    if (D2movAve > 70 || D4movAve > 70 || D6movAve > 70)
     {
       pwm_Xp += 1;
       pwm_Xn += 1;
@@ -222,7 +244,7 @@ task_80ms (void)
       pwm_Yp += 1;
       pwm_Yn += 1;
     }
-    else if(D2ave < 50 && D4ave < 50 && D6ave < 50)
+    else if(D2movAve < 50 && D4movAve < 50 && D6movAve < 50)
     {
       pwm_Xp -= 1;
       pwm_Xn -= 1;
@@ -233,41 +255,30 @@ task_80ms (void)
     }
 
     /* X測距を重力加速度の目標値にするためにZプロペラ回転を制御 */
-    /* if (D4ave > 70) */
+    /* if (D4movAve > 70) */
     /* { */
     /*   pwm_Zp += 1; */
     /*   pwm_Zn += 1; */
     /* } */
-    /* else if (D4ave < 39) */
+    /* else if (D4movAve < 39) */
     /* { */
     /*   pwm_Zp -= 1; */
     /*   pwm_Zn -= 1; */
     /* } */
 
     /* Z測距を重力加速度の目標値にするためにYプロペラ回転を制御 */
-    /* if (D6ave > 70) */
+    /* if (D6movAve > 70) */
     /* { */
     /*   pwm_Yp += 1; */
     /*   pwm_Yn += 1; */
     /* } */
-    /* else if (D6ave < 39) */
+    /* else if (D6movAve < 39) */
     /* { */
     /*   pwm_Yp -= 1; */
     /*   pwm_Yn -= 1; */
     /* } */
     timer_count++;
   }
-  /* else if (timer_count <= 30) */
-  /* { */
-  /*   pwm_Xp += 1; */
-  /*   pwm_Xn += 1; */
-  /*   pwm_Zp += 1; */
-  /*   pwm_Zn += 1; */
-  /*   pwm_Yp += 1; */
-  /*   pwm_Yn += 1; */
-  /*  */
-  /*   timer_count++; */
-  /* } */
   else {
     timer_count++;
   }
@@ -280,27 +291,27 @@ task_80ms (void)
   set_Zn_PWM(pwm_Zn);
 
   put_string ("D1:");
-  put_dec (D1ave);
+  put_dec (D1movAve);
   put_string ("\n");
 
   put_string ("D2:");
-  put_dec (D2ave);
+  put_dec (D2movAve);
   put_string ("\n");
 
   put_string ("D3:");
-  put_dec (D3ave);
+  put_dec (D3movAve);
   put_string ("\n");
 
   put_string ("D4:");
-  put_dec (D4ave);
+  put_dec (D4movAve);
   put_string ("\n");
 
   put_string ("D5:");
-  put_dec (D5ave);
+  put_dec (D5movAve);
   put_string ("\n");
 
   put_string ("D6:");
-  put_dec (D6ave);
+  put_dec (D6movAve);
   put_string ("\n");
 
   put_string ("BV:");
@@ -312,15 +323,15 @@ task_80ms (void)
   put_string ("\n");
 
   put_string ("AX:");
-  put_hex ((uint32)AXave, 4);
+  put_hex ((uint32)AXmovAve, 4);
   put_string ("\n");
 
   put_string ("AY:");
-  put_hex ((uint32)AYave, 4);
+  put_hex ((uint32)AYmovAve, 4);
   put_string ("\n");
 
   put_string ("AZ:");
-  put_hex ((uint32)AZave, 4);
+  put_hex ((uint32)AZmovAve, 4);
   put_string ("\n");
 
   put_string ("GX:");
