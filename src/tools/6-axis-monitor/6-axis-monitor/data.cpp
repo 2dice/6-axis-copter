@@ -170,7 +170,15 @@ void Data::distributeData(QByteArray &data)
 
 qreal Data::D1()
 {
-  return (qreal)sensorData.D1[sensorData.currentElement - 1];
+  if (lastElement == sensorData.currentElement)
+  {
+    return (qreal)-1;
+  }
+  else
+  {
+    lastElement = sensorData.currentElement;
+    return (qreal)sensorData.D1[sensorData.currentElement - 1];
+  }
 }
 
 qreal Data::D2()

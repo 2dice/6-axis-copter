@@ -54,6 +54,7 @@ private:
       int16_t Zp[1000];
       int16_t Zn[1000];
   };
+  int16_t lastElement;
   SensorData sensorData;
   QByteArray format_data;
 
