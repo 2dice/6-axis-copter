@@ -41,6 +41,9 @@ static uint16 D6movAve = 0;
 static int16 AXmovAve = 0;
 static int16 AYmovAve = 0;
 static int16 AZmovAve = 0;
+static int16 GXmovAve = 0;
+static int16 GYmovAve = 0;
+static int16 GZmovAve = 0;
 
 void
 task_10ms (uint8 timer_count)
@@ -76,6 +79,7 @@ task_80ms (void)
   static int8 timer_count = 0;
   const int16 steady_gravity_vector = 130;
 
+  /* 80msでの平均値算出 */
   D1ave = 0;
   D2ave = 0;
   D3ave = 0;
@@ -133,6 +137,9 @@ task_80ms (void)
   AXmovAve = (AXmovAve + AXave) / 2;
   AYmovAve = (AYmovAve + AYave) / 2;
   AZmovAve = (AZmovAve + AZave) / 2;
+  GXmovAve = (GXmovAve + GXave) / 2;
+  GYmovAve = (GYmovAve + GYave) / 2;
+  GZmovAve = (GZmovAve + GZave) / 2;
 
   /* 電源電圧9V以下(160)で放電限界(高負荷時)．ちなみに無負荷時は11.1V(196) */
   if(BVave < 160)
@@ -279,6 +286,49 @@ task_80ms (void)
     /* } */
     timer_count++;
   }
+
+  else if (timer_count == 1)
+    /* Gyroセンサ値によるモータ制御(回転抑制) */
+  {
+    /* X軸回転を目標値にするためにYプロペラ回転を制御 */
+    if (GXmovAve > 100)
+    {
+      pwm_Yp -= 1;
+      pwm_Yn += 1;
+    }
+    else if (GXmovAve < -100)
+    {
+      pwm_Yp += 1;
+      pwm_Yn -= 1;
+    }
+
+    /* Y軸回転を目標値にするためにZプロペラ回転を制御 */
+    if (GYmovAve > 100)
+    {
+      pwm_Zp -= 1;
+      pwm_Zn += 1;
+    }
+    else if (GYmovAve < -100)
+    {
+      pwm_Zp += 1;
+      pwm_Zn -= 1;
+    }
+
+    /* Z軸回転を目標値にするためにXプロペラ回転を制御 */
+    if (GZmovAve > 100)
+    {
+      pwm_Xp -= 1;
+      pwm_Xn += 1;
+    }
+    else if (GZmovAve < -100)
+    {
+      pwm_Xp += 1;
+      pwm_Xn -= 1;
+    }
+
+    timer_count++;
+  }
+
   else {
     timer_count++;
   }
@@ -335,15 +385,15 @@ task_80ms (void)
   put_string ("\n");
 
   put_string ("GX:");
-  put_hex ((uint32)GXave, 4);
+  put_hex ((uint32)GXmovAve, 4);
   put_string ("\n");
 
   put_string ("GY:");
-  put_hex ((uint32)GYave, 4);
+  put_hex ((uint32)GYmovAve, 4);
   put_string ("\n");
 
   put_string ("GZ:");
-  put_hex ((uint32)GZave, 4);
+  put_hex ((uint32)GZmovAve, 4);
   put_string ("\n");
 
   put_string ("Yp:");
