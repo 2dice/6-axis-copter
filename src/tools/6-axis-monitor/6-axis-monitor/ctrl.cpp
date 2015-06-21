@@ -16,6 +16,11 @@ Ctrl::~Ctrl()
     qDebug() << "delete Ctrl";
 }
 
+void Ctrl::send(QByteArray command)
+{
+  serial_if->writeData(command);
+}
+
 qreal Ctrl::get_D1(void)
 {
   return data->D1();

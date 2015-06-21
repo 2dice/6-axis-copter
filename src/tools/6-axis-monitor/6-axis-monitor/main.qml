@@ -11,12 +11,33 @@ Item
       id: ctrl
     }
 
+    Rectangle
+    {
+      id:button_f
+      color: "lightblue"
+      width:100;height:50
+      x: window.width/6/2-width/2
+      y: window.height/6*0+height/2
+      Text
+      {
+        id:buttonLabel
+        anchors.centerIn: parent
+        text:"f"
+      }
+      MouseArea
+      {
+        id:buttonMouseArea
+        anchors.fill: parent
+        onClicked: ctrl.send("f\n")
+      }
+    }
+
     Item
     {
       id:d1_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*0
 
       Graph
@@ -47,9 +68,9 @@ Item
     Item
     {
       id:d2_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*1
 
       Graph
@@ -80,9 +101,9 @@ Item
     Item
     {
       id:d3_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*2
 
       Graph
@@ -113,9 +134,9 @@ Item
     Item
     {
       id:d4_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*3
 
       Graph
@@ -146,9 +167,9 @@ Item
     Item
     {
       id:d5_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*4
 
       Graph
@@ -179,9 +200,9 @@ Item
     Item
     {
       id:d6_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*1
+      x: window.width/6 + (window.width - window.width/6)/3 * 1
       y: window.height/6*5
 
       Graph
@@ -212,9 +233,9 @@ Item
     Item
     {
       id:gx_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*0
 
       Graph
@@ -245,9 +266,9 @@ Item
     Item
     {
       id:gy_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*1
 
       Graph
@@ -278,9 +299,9 @@ Item
     Item
     {
       id:gz_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*2
 
       Graph
@@ -311,9 +332,9 @@ Item
     Item
     {
       id:ax_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*3
 
       Graph
@@ -344,9 +365,9 @@ Item
     Item
     {
       id:ay_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*4
 
       Graph
@@ -377,9 +398,9 @@ Item
     Item
     {
       id:az_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*2
+      x: window.width/6 + (window.width - window.width/6)/3 * 2
       y: window.height/6*5
       Graph
       {
@@ -409,9 +430,9 @@ Item
     Item
     {
       id:yp_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*0
       Graph
       {
@@ -441,9 +462,9 @@ Item
     Item
     {
       id:yn_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*1
       Graph
       {
@@ -473,9 +494,9 @@ Item
     Item
     {
       id:xp_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*2
       Graph
       {
@@ -505,9 +526,9 @@ Item
     Item
     {
       id:xn_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*3
       Graph
       {
@@ -537,9 +558,9 @@ Item
     Item
     {
       id:zp_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*4
       Graph
       {
@@ -569,9 +590,9 @@ Item
     Item
     {
       id:zn_window
-      width: window.width/3
+      width: (window.width - window.width/6)/3
       height: window.height/6
-      x: window.width/3*0
+      x: window.width/6 + (window.width - window.width/6)/3 * 0
       y: window.height/6*5
       Graph
       {

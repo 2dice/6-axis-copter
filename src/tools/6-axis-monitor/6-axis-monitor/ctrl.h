@@ -12,6 +12,7 @@ class Ctrl : public QQuickItem
 public:
     explicit Ctrl(QQuickItem *parent = 0);
     ~Ctrl();
+    Q_INVOKABLE void send(const QByteArray);
     Q_INVOKABLE qreal get_D1(void);
     Q_INVOKABLE qreal get_D2(void);
     Q_INVOKABLE qreal get_D3(void);

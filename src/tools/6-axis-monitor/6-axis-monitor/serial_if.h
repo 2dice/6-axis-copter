@@ -11,6 +11,7 @@ class serial_if : public QObject
 public:
     explicit serial_if(QObject *parent = 0);
     ~serial_if();
+    void writeData(const QByteArray &data);
 
 private:
     struct Settings {
@@ -42,7 +43,6 @@ public slots:
 private slots:
     void openSerialPort();
     void closeSerialPort();
-    void writeData(const QByteArray &data);
     void readData();
     void handleError(QSerialPort::SerialPortError error);
 };
